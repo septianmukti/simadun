@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="app-url" content="http://localhost:8000/">
+    <meta name="app-url" content="{{ env('APP_URL') }}">
     <meta name="description" content="SiMadun merupakan aplikasi milik Diskominfo Kabupaten Madiun yang digunakan untuk mengajukan proposal kerjasama antara Pemkab Madiun dan Perusahaan Media.">
     <meta name="keywords" content="SiMadun, Kabupaten Madiun, Kampung Pesilat, Diskominfo Kabupaten Madiun">
     <meta name="author" content="Yan">
