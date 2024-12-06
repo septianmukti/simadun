@@ -44,7 +44,7 @@
                         <th>Nama Media</th>
                         <th>Tanggal Pengajuan</th>
                         <th>Status Pengajuan</th>
-                        <th>Action</th>
+                        <th class="text-center" data-orderable="false">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -66,13 +66,13 @@
                           <span class="badge badge-success">{{strtoupper($pengajuans->status)}}</span>
                           @endif
                         </td>
-                        <td>
-                          <a class="btn btn-xs btn-outline-primary-2x" type="button" title="Lihat" href="{{ route('lihat-pengajuan', $pengajuans->id) }}">Lihat</a>
+                        <td class="text-center">
+                          <a class="btn btn-pill btn-outline-primary btn-air-primary btn-sm m-b-5" type="button" title="Lihat" href="{{ route('lihat-pengajuan', $pengajuans->id) }}">Lihat</a>
                           @if ($pengajuans->status == 'proses')
                           <form action="{{ route('delete.pengajuan', $pengajuans->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a type="submit" onclick="return false" class="btn btn-xs btn-outline-danger-2x delete-confirm" data-toggle="tooltip" title='Hapus'>Hapus</a>
+                            <a type="submit" onclick="return false" class="btn btn-pill btn-outline-danger btn-air-danger btn-sm delete-confirm" data-toggle="tooltip" title='Hapus'>Hapus</a>
                           </form>
                           @endif
                         </td>

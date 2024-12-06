@@ -32,4 +32,17 @@ class AkunController extends Controller
             return redirect()->back()->with('error', $t->getMessage());
         }
     }
+
+    public function DeleteApprovalAkun($id)
+    {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
+        try {
+            User::where('id', $id)->delete();
+            return back()->with('success', 'Pengajuan Akun Berhasil Dihapus !!');
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
+        }
+    }
 }

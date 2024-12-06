@@ -39,8 +39,8 @@
                                 <input class="form-control" name="name" type="text" required="" placeholder="Nama Lengkap Wartawan">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label pt-0">Nomor Telepon/HP</label>
-                                <input class="form-control" name="no_hp" type="text" required="" placeholder="Nomor Telepon/HP">
+                                <label class="col-form-label pt-0">Nomor Telepon/HP Wartawan</label>
+                                <input class="form-control" name="no_hp" type="number" required="" placeholder="Nomor Telepon/HP Wartawan">
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label pt-0">Pilih Jenis Media</label>

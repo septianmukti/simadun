@@ -67,6 +67,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session')])->group(fun
         Route::controller(AkunController::class)->group(function () {
             Route::get('/approval-account', 'ViewApprovalAkun')->name('view-approval-akun');
             Route::put('/active-account/{id}', 'ActiveAccount')->name('proses-active-akun');
+            Route::delete('/approval-account/delete/{id}', 'DeleteApprovalAkun')->name('delete-approval-akun');
         });
         Route::controller(VerifController::class)->group(function () {
             Route::get('/list-verif-pengajuan', 'ListVerifPengajuan')->name('list.verif.pengajuan');

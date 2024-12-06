@@ -5,6 +5,7 @@
 @endsection
 
 @section('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/sweetalert2.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/datatables.css') }}">
 @endsection
 
@@ -28,7 +29,7 @@
           <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
-                <h4>Approval Akun </h4><span>Semua Akun dibawah ini merupakan semua Akun yang telah terdaftar di Aplikasi SiMadun dan belum di Approve oleh Admin.</span>
+                <h4>Pengajuan Pembuatan Akun </h4><span>Semua Akun dibawah ini merupakan semua Akun yang telah terdaftar di Aplikasi SiMadun dan belum di Approve oleh Admin.</span>
               </div>
               <div class="card-body">
                 @include('../components/notif')
@@ -42,7 +43,7 @@
                         <th>Nomor Telepon</th>
                         <th>Nama Media</th>
                         <th>Status Akun</th>
-                        <th>Action</th>
+                        <th class="text-center" data-orderable="false">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -55,12 +56,23 @@
                         <td>{{$inactive->no_hp}}</td>
                         <td>{{$inactive->media_name}}</td>
                         <td> <span class="badge badge-danger">{{ucfirst($inactive->account_status)}}</span></td>
-                        <td>
-                          <form action="{{ route('proses-active-akun', $inactive->id) }}" method="POST">
-                              @method('PUT')
-                              @csrf
-                              <button class="btn btn-success" type="submit" title="Approve">Approve</button>
-                          </form>
+                        <td class="row">
+                          <div class="btn-group">
+                            <div class="col-md-6">
+                              <form action="{{ route('proses-active-akun', $inactive->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <a class="btn btn-pill btn-outline-success btn-air-success btn-xs approve" type="submit" onclick="return false" data-toggle="tooltip" title="Approve">Approve</a>
+                              </form>
+                            </div>
+                            <div class="col-md-6">
+                              <form action="{{ route('delete-approval-akun', $inactive->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <a class="btn btn-pill btn-outline-danger btn-air-danger btn-xs delete-confirm" type="submit" onclick="return false" data-toggle="tooltip" title='Hapus'>Hapus</a>
+                              </form>
+                            </div>
+                          </div>  
                         </td>
                       </tr>
                       @endforeach
@@ -129,8 +141,45 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
     <script>
       $("#approval-account, #list-account").DataTable();
+    </script>
+    <script type="text/javascript">
+      $('.approve').on('click', function (e) {
+        e.preventDefault();
+        let form = $(this).closest('form');
+        swal({
+          title: `Anda Yakin?`,
+          text: "Anda akan menyetujui pembuatan akun ini.",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            form.submit();
+          }
+        });
+      });
+    </script>
+    <script type="text/javascript">
+      $('.delete-confirm').on('click', function (e) {
+        e.preventDefault();
+        let form = $(this).closest('form');
+        swal({
+          title: `Anda Yakin?`,
+          text: "Akun yang dihapus tidak dapat dikembalikan.",
+          icon: "error",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            form.submit();
+          }
+        });
+      });
     </script>
 @endsection
