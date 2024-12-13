@@ -42,6 +42,7 @@
                         <th>Email</th>
                         <th>Nomor Telepon</th>
                         <th>Nama Media</th>
+                        <th>Tanggal Daftar</th>
                         <th>Status Akun</th>
                         <th class="text-center" data-orderable="false">Action</th>
                       </tr>
@@ -55,6 +56,7 @@
                         <td>{{$inactive->email}}</td>
                         <td>{{$inactive->no_hp}}</td>
                         <td>{{$inactive->media_name}}</td>
+                        <td>{{$inactive->created_at}}</td>
                         <td> <span class="badge badge-danger">{{ucfirst($inactive->account_status)}}</span></td>
                         <td class="row">
                           <div class="btn-group">
@@ -98,6 +100,7 @@
                         <th>Nomor Telepon</th>
                         <th>Nama Media</th>
                         <th>Status Akun</th>
+                        <th>Tanggal Approve</th>
                         <th>Role</th>
                         <th>Action</th>
                       </tr>
@@ -112,17 +115,18 @@
                         <td>{{$active->no_hp}}</td>
                         <td>{{$active->media_name}}</td>
                         <td> <span class="badge badge-success">{{ucfirst($active->account_status)}}</span></td>
+                        <td>{{$active->updated_at}}</td>
                         <td>
                           @if ($active->role == 'user')
                           <span class="badge badge-light-success">{{ucfirst($active->role)}}</span>
                           @elseif ($active->role == 'admin')
                           <span class="badge badge-light-danger">{{ucfirst($active->role)}}</span>
-                          @endif 
+                          @endif
                         </td>
                         <td>
                           <ul class="action">
-                            <li class="detail"><a data-bs-toggle="tooltip" title="Detail" href="javascript:void()"><i class="icon-eye"></i></a></li>
-                            <li class="edit"> <a data-bs-toggle="tooltip" title="Edit" href="javascript:void()"><i class="icon-pencil-alt"></i></a></li>
+                            <li class="detail"><a data-bs-toggle="tooltip" title="Kunci Akun" href="javascript:void()"><i class="icon-lock"></i></a></li>
+                            <li class="edit"><a data-bs-toggle="tooltip" title="Edit" href="javascript:void()"><i class="icon-pencil-alt"></i></a></li>
                             <li class="delete"><a data-bs-toggle="tooltip" title="Hapus" href="javascript:void()"><i class="icon-trash"></i></a></li>
                           </ul>
                         </td>

@@ -1,7 +1,7 @@
 @extends('../layouts/admin/main')
 
 @section('tittle')
-    <title>Detail Verifikasi Pengajuan Kerjasama - Aplikasi SiMadun Pemerintah Kabupaten Madiun</title>
+    <title>Detail Verifikasi Pengajuan Kerja Sama - Aplikasi SiMadun Pemerintah Kabupaten Madiun</title>
 @endsection
 
 @section('css')
@@ -11,11 +11,11 @@
 
 @section('breadcrumb')
     <div class="col-4 col-xl-4 page-title">
-      <h4 class="f-w-700">Detail Pengajuan Kerjasama</h4>
+      <h4 class="f-w-700">Detail Pengajuan Kerja Sama</h4>
       <nav>
         <ol class="breadcrumb justify-content-sm-start align-items-center mb-0">
           <li class="breadcrumb-item"><a href="{{ route('view-dashboard') }}"> <i data-feather="home"> </i></a></li>
-          <li class="breadcrumb-item f-w-400 active">Detail Verifikasi Pengajuan Kerjasama</li>
+          <li class="breadcrumb-item f-w-400 active">Detail Verifikasi Pengajuan Kerja Sama</li>
         </ol>
       </nav>
     </div>
@@ -30,7 +30,7 @@
             <div class="card">
               <div class="card-header card-no-border pb-0">
                 <div class="header-top">
-                  <h4>Detail Verifikasi Pengajuan Kerjasama Media</h4>
+                  <h4>Detail Verifikasi Pengajuan Kerja Sama Media</h4>
                 </div>
               </div>
               <div class="card-body p-0 featured-table">
@@ -46,7 +46,7 @@
                     <tbody>
                       <tr>
                         <td class="text-center">1.</td>
-                        <td>Surat Permohonan Kerjasama kepada Kepala Dinas</td>
+                        <td>Surat Permohonan Kerja Sama kepada Kepala Dinas</td>
                         <td>
                           <a class="btn btn-sm btn-outline-primary-2x" type="button" title="Lihat Dokumen" target="_blank" href="{{route('surat.kerjasama', $pengajuan->surat_permohonan_kerjasama)}}">Lihat</a>
                         </td>
@@ -67,7 +67,7 @@
                       </tr>
                       <tr>
                         <td class="text-center">4.</td>
-                        <td>NIB/SIUP/SITU</td>
+                        <td>NIB Berbasis Risiko/SIUP/SITU</td>
                         <td>
                           <a class="btn btn-sm btn-outline-primary-2x" type="button" title="Lihat Dokumen" target="_blank" href="{{route('nib.siup.situ', $pengajuan->nib_siup_situ)}}">Lihat</a>
                         </td>
@@ -123,14 +123,14 @@
                       </tr>
                       <tr>
                         <td class="text-center">12.</td>
-                        <td>Surat Pernyataan nama Penanggungjawab</td>
+                        <td>Surat Pernyataan nama Penanggung jawab</td>
                         <td>
                           <a class="btn btn-sm btn-outline-primary-2x" type="button" title="Lihat Dokumen" target="_blank" href="{{route('surat.penanggungjawab', $pengajuan->surat_pernyataan_penanggungjawab)}}">Lihat</a>
                         </td>
                       </tr>
                       <tr>
                         <td class="text-center">13.</td>
-                        <td>Surat Kuasa apabila penanggungjawab selain pimpinan</td>
+                        <td>Surat Kuasa apabila penanggung jawab selain pimpinan</td>
                         <td>
                           <a class="btn btn-sm btn-outline-primary-2x" type="button" title="Lihat Dokumen" target="_blank" href="{{route('surat.kuasa', $pengajuan->surat_kuasa)}}">Lihat</a>
                         </td>

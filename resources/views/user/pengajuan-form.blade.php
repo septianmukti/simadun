@@ -1,17 +1,17 @@
 @extends('../layouts/admin/main')
 
 @section('tittle')
-    <title>Formulir Pengajuan Kerjasama - Aplikasi SiMadun Pemerintah Kabupaten Madiun</title>
+    <title>Formulir Pengajuan Kerja Sama - Aplikasi SiMadun Pemerintah Kabupaten Madiun</title>
 @endsection
 
 @section('breadcrumb')
     <div class="col-4 col-xl-4 page-title">
-        <h4 class="f-w-700">Formulir Pengajuan Kerjasama</h4>
+        <h4 class="f-w-700">Formulir Pengajuan Kerja Sama</h4>
         <nav>
             <ol class="breadcrumb justify-content-sm-start align-items-center mb-0">
                 <li class="breadcrumb-item"><a href="{{ route('view-dashboard') }}"> <i data-feather="home"> </i></a></li>
                 <li class="breadcrumb-item f-w-400">Pengajuan</li>
-                <li class="breadcrumb-item f-w-400 active">Formulir Pengajuan Kerjasama</li>
+                <li class="breadcrumb-item f-w-400 active">Formulir Pengajuan Kerja Sama</li>
             </ol>
         </nav>
     </div>
@@ -31,13 +31,20 @@
                             <p class="mb-0 m-l-10">2. Dokumen berukuran maksimal 3 MB</p>
                         </div>
                         <div class="card-body">
+                            @if ($errors->any())
+                            <div class="alert alert-light-danger" role="alert">
+                                @foreach ($errors->all() as $error)
+                                <p class="txt-danger">• {{ $error }}</p>
+                                @endforeach
+                            </div>
+                            @endif
                             <div class="form theme-form">
                                 <form method="POST" action="{{ route('upload-pengajuan') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3">
-                                                <label class="form-label">1. Surat Permohonan Kerjasama kepada Kepala Dinas</label>
+                                                <label class="form-label">1. Surat Permohonan Kerja Sama kepada Kepala Dinas</label>
                                                 <input class="form-control btn-pill" name="surat_kerjasama" type="file" required="">
                                             </div>
                                         </div>
@@ -59,7 +66,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="mb-3">
-                                                <label class="form-label">4. NIB/SIUP/SITU</label>
+                                                <label class="form-label">4. NIB Berbasis Risiko/SIUP/SITU</label>
                                                 <input class="form-control btn-pill" name="nib_siup_situ" type="file" required="">
                                                 <div class="invalid-feedback">Invalid form file selected</div>
                                             </div>
@@ -123,7 +130,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="mb-3">
-                                                <label class="form-label">12. Surat Pernyataan nama Penanggungjawab</label>
+                                                <label class="form-label">12. Surat Pernyataan nama penanggung jawab</label>
                                                 <input class="form-control btn-pill" name="surat_penanggungjawab" type="file" required="">
                                                 <div class="invalid-feedback">Invalid form file selected</div>
                                             </div>
@@ -132,7 +139,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3">
-                                                <label class="form-label">13. Surat Kuasa apabila penanggungjawab selain pimpinan</label>
+                                                <label class="form-label">13. Surat Kuasa apabila penanggung jawab selain pimpinan</label>
                                                 <input class="form-control btn-pill" name="surat_kuasa" type="file" required="">
                                                 <div class="invalid-feedback">Invalid form file selected</div>
                                             </div>

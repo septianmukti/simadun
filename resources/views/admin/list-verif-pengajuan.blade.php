@@ -1,7 +1,7 @@
 @extends('../layouts/admin/main')
 
 @section('tittle')
-    <title>Semua Pengajuan Kerjasama - Aplikasi SiMadun Pemerintah Kabupaten Madiun</title>
+    <title>Semua Pengajuan Kerja Sama - Aplikasi SiMadun Pemerintah Kabupaten Madiun</title>
 @endsection
 
 @section('css')
@@ -11,11 +11,11 @@
 
 @section('breadcrumb')
     <div class="col-4 col-xl-4 page-title">
-      <h4 class="f-w-700">Semua Pengajuan Kerjasama</h4>
+      <h4 class="f-w-700">Semua Pengajuan Kerja Sama</h4>
       <nav>
         <ol class="breadcrumb justify-content-sm-start align-items-center mb-0">
           <li class="breadcrumb-item"><a href="{{ route('view-dashboard') }}"> <i data-feather="home"> </i></a></li>
-          <li class="breadcrumb-item f-w-400 active">Semua Pengajuan Kerjasama</li>
+          <li class="breadcrumb-item f-w-400 active">Semua Pengajuan Kerja Sama</li>
         </ol>
       </nav>
     </div>
@@ -29,7 +29,7 @@
                 <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
-                <h4>Semua Pengajuan Kerjasama </h4><span>Semua Pengajuan Kerjasama Media dan Dinas Komunikasi dan Informatika Kabupaten Madiun.</span>
+                <h4>Semua Pengajuan Kerja Sama </h4><span>Semua Pengajuan Kerja Sama Media dan Dinas Komunikasi dan Informatika Kabupaten Madiun.</span>
               </div>
               <div class="card-body">
                 @include('../components/notif')

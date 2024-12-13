@@ -33,6 +33,16 @@ class AkunController extends Controller
         }
     }
 
+    public function NonActiveAccount($id)
+    {
+        try {
+            User::findOrFail($id)->update(['account_status' => 'inactive']);
+            return redirect()->back()->with('success', 'Akun sudah di nonaktifkan !!');
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
+        }
+    }
+
     public function DeleteApprovalAkun($id)
     {
         if (!Auth::check()) {
