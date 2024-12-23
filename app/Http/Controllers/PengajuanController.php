@@ -163,6 +163,7 @@ class PengajuanController extends Controller
                         'pernyataan_media_cetak' => 'required|mimes:pdf|max:3072',
                         'pernyataan_oplah' => 'required|mimes:pdf|max:3072',
                     ]);
+                    
                     if ($request->pernyataan_media_cetak != '') {
                         $random = Str::random(40);
                         $file = $request->file('pernyataan_media_cetak');
@@ -209,14 +210,16 @@ class PengajuanController extends Controller
                     if ($request->surat_izin != '') {
                         $random = Str::random(40);
                         $file = $request->file('surat_izin');
+                        $suratizin = $random . '.' . $file->getClientOriginalExtension();
                         $path = 'pengajuan/surat_izin';
-                        $suratizin = $file->move($path, $random . '.' . $file->getClientOriginalExtension());
+                        $file->move($path, $suratizin);
                     }
                     if ($request->pernyataan_media_elektronik != '') {
                         $random = Str::random(40);
                         $file = $request->file('pernyataan_media_elektronik');
+                        $pernyataanmediaelektronik = $random . '.' . $file->getClientOriginalExtension();
                         $path = 'pengajuan/pernyataan_media_elektronik';
-                        $pernyataanmediaelektronik = $file->move($path, $random . '.' . $file->getClientOriginalExtension());
+                        $file->move($path, $pernyataanmediaelektronik);
                     }
                     Pengajuan::create([
                         'user_id'                           => Auth::user()->id,
@@ -251,20 +254,23 @@ class PengajuanController extends Controller
                     if ($request->pernyataan_media_siber != '') {
                         $random = Str::random(40);
                         $file = $request->file('pernyataan_media_siber');
+                        $pernyataanmediasiber = $random . '.' . $file->getClientOriginalExtension();
                         $path = 'pengajuan/pernyataan_media_siber';
-                        $pernyataanmediasiber = $file->move($path, $random . '.' . $file->getClientOriginalExtension());
+                        $file->move($path, $pernyataanmediasiber);
                     }
                     if ($request->screenshoot_web != '') {
                         $random = Str::random(40);
                         $file = $request->file('screenshoot_web');
+                        $screenshootweb = $random . '.' . $file->getClientOriginalExtension();
                         $path = 'pengajuan/screenshoot_web';
-                        $screenshootweb = $file->move($path, $random . '.' . $file->getClientOriginalExtension());
+                        $file->move($path, $screenshootweb);
                     }
                     if ($request->screenshoot_data_pengunjung != '') {
                         $random = Str::random(40);
                         $file = $request->file('screenshoot_data_pengunjung');
+                        $screenshootdatapengunjung = $random . '.' . $file->getClientOriginalExtension();
                         $path = 'pengajuan/screenshoot_data_pengunjung';
-                        $screenshootdatapengunjung = $file->move($path, $random . '.' . $file->getClientOriginalExtension());
+                        $file->move($path, $screenshootdatapengunjung);
                     }
                     Pengajuan::create([
                         'user_id'                             => Auth::user()->id,
