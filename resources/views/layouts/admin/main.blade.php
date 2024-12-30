@@ -3,25 +3,27 @@
 @section('body')
 
 <body>
-    <div class="loader-wrapper">
-        <div class="loader loader-1">
-            <div class="loader-outter"></div>
-            <div class="loader-inner"></div>
-            <div class="loader-inner-1"></div>
+    <div class="content">
+        <div class="loader-wrapper">
+            <div class="loader loader-1">
+                <div class="loader-outter"></div>
+                <div class="loader-inner"></div>
+                <div class="loader-inner-1"></div>
+            </div>
         </div>
-    </div>
-    <!-- loader ends-->
-    <!-- tap on top starts-->
-    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
-    <!-- tap on tap ends-->
-    <!-- page-wrapper Start-->
-    <div class="page-wrapper compact-wrapper" id="pageWrapper">
-        @include('../layouts/admin/include/header')
-        <!-- Page Body Start-->
-        <div class="page-body-wrapper">
-            @include('../layouts/admin/include/sidebar')
-            @yield('page-body')
-            @include('../layouts/admin/include/footer')
+        <!-- loader ends-->
+        <!-- tap on top starts-->
+        <div class="tap-top"><i data-feather="chevrons-up"></i></div>
+        <!-- tap on tap ends-->
+        <!-- page-wrapper Start-->
+        <div class="page-wrapper compact-wrapper" id="pageWrapper">
+            @include('../layouts/admin/include/header')
+            <!-- Page Body Start-->
+            <div class="page-body-wrapper">
+                @include('../layouts/admin/include/sidebar')
+                @yield('page-body')
+                @include('../layouts/admin/include/footer')
+            </div>
         </div>
     </div>
 
