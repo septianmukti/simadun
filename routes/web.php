@@ -11,7 +11,7 @@ Route::get('/', function () {
     return redirect(route('login'));
 });
 
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'hsts'])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'hsts', 'minify'])->group(function () {
 
     Route::get('/approve', [DashboardController::class, 'approval'])->name('approval');
 

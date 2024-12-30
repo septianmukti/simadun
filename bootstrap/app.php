@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \App\Http\Middleware\Role::class,
             'account_status' => \App\Http\Middleware\CheckApproved::class,
             'hsts' => \App\Http\Middleware\Hsts::class,
+            'minify' => \App\Http\Middleware\Minify::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
