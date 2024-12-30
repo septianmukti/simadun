@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\Role::class,
             'account_status' => \App\Http\Middleware\CheckApproved::class,
+            'hsts' => \App\Http\Middleware\Hsts::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
