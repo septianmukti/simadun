@@ -31,6 +31,7 @@ class VerifController extends Controller
         return view('admin.detail-verif-pengajuan', ['pengajuan' => $pengajuan]);
     }
 
+    // APPROVE OR REJECT PENGAJUAN EDIT
     public function ApprovedPengajuan($id)
     {
         if (!Auth::check()) {

@@ -11,7 +11,7 @@ Route::get('/', function () {
     return redirect(route('login'));
 });
 
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'hsts', 'minify'])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'hsts'])->group(function () {
 
     Route::get('/approve', [DashboardController::class, 'approval'])->name('approval');
 
@@ -36,6 +36,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'hsts', 'mi
             Route::get('/surat_kuasa/{surat_kuasa}', 'surat_kuasa')->name('surat.kuasa');
             Route::get('/sertifikat_pers/{sertifikat_pers}', 'sertifikat_pers')->name('sertifikat.pers');
             Route::get('/surat_kebenaran/{surat_kebenaran}', 'surat_kebenaran')->name('surat.kebenaran');
+            Route::get('/sertifikat_ukw/{sertifikat_ukw}', 'sertifikat_ukw')->name('sertifikat.ukw');
             // MEDIA CETAK
             Route::get('/pernyataan_media_cetak/{pernyataan_media_cetak}', 'pernyataan_media_cetak')->name('pernyataan.media.cetak');
             Route::get('/pernyataan_oplah/{pernyataan_oplah}', 'pernyataan_oplah')->name('pernyataan.oplah');

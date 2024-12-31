@@ -162,74 +162,83 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="mb-3">
-                                                <label>16. Masukkan Link e-Katalog</label>
+                                                <label class="form-label">16. Sertifikat Uji Kompetensi Wartawan (UKW) bertugas di Kab.Madiun</label>
+                                                <input class="form-control btn-pill" name="sertifikat_ukw" type="file" required="">
+                                                <div class="invalid-feedback">Invalid form file selected</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="mb-3">
+                                                <label>17. Masukkan Link e-Katalog</label>
                                                 <input class="form-control btn-pill" name="link_katalog" type="text" placeholder="Masukkan Link e-Katalog" required="">
                                                 <div class="invalid-feedback">Invalid select feedback</div>
                                             </div>
                                         </div>
-                                        @if(Auth::user()->jenis_perusahaan == 'media-cetak')
-                                        <div class="row">
-                                            <h4 class="mb-3 mt-3">Upload Dokumen Ketentuan Khusus Media Cetak</h4>
-                                            <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Surat Pernyataan selama 3 Bulan Terakhir Media Cetak</label>
-                                                    <input class="form-control btn-pill" name="pernyataan_media_cetak" type="file" required="">
-                                                    <div class="invalid-feedback">Invalid form file selected</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Surat Pernyataan Jumlah Oplah per Sekali Terbit</label>
-                                                    <input class="form-control btn-pill" name="pernyataan_oplah" type="file" required="">
-                                                    <div class="invalid-feedback">Invalid form file selected</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @elseif(Auth::user()->jenis_perusahaan == 'media-elektronik')
-                                        <div class="row">
-                                            <h4 class="mb-3 mt-3">Upload Dokumen Ketentuan Khusus Media Elektronik</h4>
-                                            <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Izin Penyelenggaraan Siaran Media Elektronik</label>
-                                                    <input class="form-control btn-pill" name="surat_izin" type="file" required="">
-                                                    <div class="invalid-feedback">Invalid form file selected</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Surat Pernyataan bahwa siaran dapat diakses masyarakat</label>
-                                                    <input class="form-control btn-pill" name="pernyataan_media_elektronik" type="file" required="">
-                                                    <div class="invalid-feedback">Invalid form file selected</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @elseif(Auth::user()->jenis_perusahaan == 'media-siber')
-                                        <div class="row">
-                                            <h4 class="mb-3 mt-3">Upload Dokumen Ketentuan Khusus Media Siber</h4>
-                                            <div class="col-sm-4">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Surat Pernyataan Perusahaan Bergerak di Bidang Media Online/Siber</label>
-                                                    <input class="form-control btn-pill" name="pernyataan_media_siber" type="file" required="">
-                                                    <div class="invalid-feedback">Invalid form file selected</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Screenshoot URL dan Halaman Utama Web, dan Data Perusahaan Media Online/Siber</label>
-                                                    <input class="form-control btn-pill" name="screenshoot_web" type="file" required="">
-                                                    <div class="invalid-feedback">Invalid form file selected</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Screenshoot Data Pengunjung Web Berdasarkan Situs similarweb.com atau lainnya</label>
-                                                    <input class="form-control btn-pill" name="screenshoot_data_pengunjung" type="file" required="">
-                                                    <div class="invalid-feedback">Invalid form file selected</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @endif
                                     </div>
+                                    @if(Auth::user()->jenis_perusahaan == 'media-cetak')
+                                    <div class="row">
+                                        <h4 class="mb-3 mt-3">Upload Dokumen Ketentuan Khusus Media Cetak</h4>
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Surat Pernyataan selama 3 Bulan Terakhir Media Cetak</label>
+                                                <input class="form-control btn-pill" name="pernyataan_media_cetak" type="file" required="">
+                                                <div class="invalid-feedback">Invalid form file selected</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Surat Pernyataan Jumlah Oplah per Sekali Terbit</label>
+                                                <input class="form-control btn-pill" name="pernyataan_oplah" type="file" required="">
+                                                <div class="invalid-feedback">Invalid form file selected</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @elseif(Auth::user()->jenis_perusahaan == 'media-elektronik')
+                                    <div class="row">
+                                        <h4 class="mb-3 mt-3">Upload Dokumen Ketentuan Khusus Media Elektronik</h4>
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Izin Penyelenggaraan Siaran Media Elektronik</label>
+                                                <input class="form-control btn-pill" name="surat_izin" type="file" required="">
+                                                <div class="invalid-feedback">Invalid form file selected</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Surat Pernyataan bahwa siaran dapat diakses masyarakat</label>
+                                                <input class="form-control btn-pill" name="pernyataan_media_elektronik" type="file" required="">
+                                                <div class="invalid-feedback">Invalid form file selected</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @elseif(Auth::user()->jenis_perusahaan == 'media-siber')
+                                    <div class="row">
+                                        <h4 class="mb-3 mt-3">Upload Dokumen Ketentuan Khusus Media Siber</h4>
+                                        <div class="col-sm-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Surat Pernyataan Perusahaan Bergerak di Bidang Media Online/Siber</label>
+                                                <input class="form-control btn-pill" name="pernyataan_media_siber" type="file" required="">
+                                                <div class="invalid-feedback">Invalid form file selected</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Screenshoot URL dan Halaman Utama Web, dan Data Perusahaan Media Online/Siber</label>
+                                                <input class="form-control btn-pill" name="screenshoot_web" type="file" required="">
+                                                <div class="invalid-feedback">Invalid form file selected</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Screenshoot Data Pengunjung Web Berdasarkan Situs similarweb.com atau lainnya</label>
+                                                <input class="form-control btn-pill" name="screenshoot_data_pengunjung" type="file" required="">
+                                                <div class="invalid-feedback">Invalid form file selected</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
                                     <div class="row">
                                         <div class="col">
                                             <div class="text-end">

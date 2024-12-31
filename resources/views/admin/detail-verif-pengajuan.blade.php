@@ -151,6 +151,13 @@
                       </tr>
                       <tr>
                         <td class="text-center">16.</td>
+                        <td>Sertifikat Uji Kompetensi Wartawan (UKW) yang bertugas di Kabupaten Madiun</td>
+                        <td>
+                          <a class="btn btn-sm btn-outline-primary-2x" type="button" title="Lihat Dokumen" target="_blank" href="{{route('sertifikat.ukw', $pengajuan->sertifikat_ukw)}}">Lihat</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center">17.</td>
                         <td>Link e-Katalog</td>
                         <td>
                           <a class="btn btn-sm btn-outline-primary-2x" type="button" title="Kunjungi Katalog" target="_blank" href="{{ url($pengajuan->link_e_katalog) }}">Lihat</a>
@@ -215,15 +222,34 @@
               </div>
               <div class="card-footer">
                 <div class="row">
+                  <div class="col-sm-12">
+                    <div class="mb-3">
+                      <label>CATATAN *</label>
+                      <textarea class="form-control input-air-primary" name="catatan" id="exampleFormControlTextarea4" placeholder="Masukkan Catatan" rows="3">{{$pengajuan->catatan}}</textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
                   <div class="col">
                     <div class="text-end">
-                      @if ($pengajuan->status == 'ditolak' || $pengajuan->status == 'proses')
+                      @if ($pengajuan->status == 'proses')
                       <form action="{{ route('approved.pengajuan', $pengajuan->id) }}" method="POST" style="display: inline-block;">
                         @csrf
                         @method('PUT')
                         <a type="submit" onclick="return false" class="btn btn-success me-1 approved-confirm" data-toggle="tooltip" title='Setujui'>Setujui</a>
                       </form>
-                      @elseif ($pengajuan->status == 'disetujui' || $pengajuan->status == 'proses')
+                      <form action="{{ route('reject.pengajuan', $pengajuan->id) }}" method="POST" style="display: inline-block;">
+                        @csrf
+                        @method('PUT')
+                        <a type="submit" onclick="return false" class="btn btn-danger me-1 reject-confirm" data-toggle="tooltip" title='Tolak'>Tolak</a>
+                      </form>
+                      @elseif ($pengajuan->status == 'ditolak')
+                      <form action="{{ route('approved.pengajuan', $pengajuan->id) }}" method="POST" style="display: inline-block;">
+                        @csrf
+                        @method('PUT')
+                        <a type="submit" onclick="return false" class="btn btn-success me-1 approved-confirm" data-toggle="tooltip" title='Setujui'>Setujui</a>
+                      </form>
+                      @elseif ($pengajuan->status == 'disetujui')
                       <form action="{{ route('reject.pengajuan', $pengajuan->id) }}" method="POST" style="display: inline-block;">
                         @csrf
                         @method('PUT')

@@ -26,6 +26,7 @@ class Pengajuan extends Model
         'surat_kuasa',
         'sertifikat_verif_dewan_pers',
         'surat_pernyataan_kebenaran',
+        'sertifikat_ukw',
         'link_e_katalog',
         'surat_pernyataan_media_cetak',
         'surat_pernyataan_jumlah_oplah',
@@ -35,6 +36,7 @@ class Pengajuan extends Model
         'surat_pernyataan_media_siber',
         'screenshoot_data_pengunjung_web',
         'status',
+        'catatan'
     ];
 
     public function users() {

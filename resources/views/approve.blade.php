@@ -26,7 +26,15 @@
                         <div class="card-body">
                             <div class="img-overlay">
                                 <h1>Selamat Datang di Aplikasi SiMadun, {{ Auth::user()->name }}!</h1>
-                                <p>Akun anda sudah terdaftar. Silahkan menunggu Approval akun anda oleh Admin.</br><a class="btn" target="_blank" href="https://wa.me/+6281233589345">Hubungi Admin 1</a><a class="btn" target="_blank" href="https://wa.me/+6285259809286">Hubungi Admin 2</a>
+                                <p>Akun anda sudah terdaftar. Silahkan menunggu Approval akun anda oleh Admin.</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="text-center">
+                                            <a class="btn" target="_blank" href="https://wa.me/+6281233589345">Hubungi Admin 1</a>
+                                            <a class="btn" target="_blank" href="https://wa.me/+6285259809286">Hubungi Admin 2</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

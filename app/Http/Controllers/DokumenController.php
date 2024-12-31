@@ -188,6 +188,18 @@ class DokumenController extends Controller
         return response()->file($file_path);
     }
 
+    public function sertifikat_ukw($sertifikat_ukw)
+    {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
+        $file_path = public_path('pengajuan/sertifikat_ukw/' . $sertifikat_ukw);
+        if (!file_exists($file_path)) {
+            abort(404, 'File not found');
+        }
+        return response()->file($file_path);
+    }
+
     // MEDIA CETAK
     public function pernyataan_media_cetak($pernyataan_media_cetak)
     {

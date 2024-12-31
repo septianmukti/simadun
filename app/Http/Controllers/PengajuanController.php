@@ -48,7 +48,9 @@ class PengajuanController extends Controller
                 'surat_kuasa' => 'required|mimes:pdf|max:3072',
                 'sertifikat_pers' => 'required|mimes:pdf|max:3072',
                 'surat_kebenaran' => 'required|mimes:pdf|max:3072',
+                'sertifikat_ukw' => 'required|mimes:pdf|max:3072',
                 'link_katalog' => ['required', 'string', 'max:255'],
+                'catatan' => ['string', 'max:255'],
             ]);
             try {
                 if ($request->surat_kerjasama != '') {
@@ -156,6 +158,13 @@ class PengajuanController extends Controller
                     $path = 'pengajuan/surat_kebenaran';
                     $file->move($path, $suratkebenaran);
                 }
+                if ($request->sertifikat_ukw != '') {
+                    $random = Str::random(40);
+                    $file = $request->file('sertifikat_ukw');
+                    $sertifikatukw = $random . '.' . $file->getClientOriginalExtension();
+                    $path = 'pengajuan/sertifikat_ukw';
+                    $file->move($path, $sertifikatukw);
+                }
 
                 if (Auth::user()->jenis_perusahaan == 'media-cetak') {
                     $request->validate([
@@ -196,7 +205,9 @@ class PengajuanController extends Controller
                         'surat_kuasa'                       => $suratkuasa,
                         'sertifikat_verif_dewan_pers'       => $sertifikatpers,
                         'surat_pernyataan_kebenaran'        => $suratkebenaran,
+                        'sertifikat_ukw'                    => $sertifikatukw,
                         'link_e_katalog'                    => $request->link_katalog,
+                        'catatan'                           => $request->catatan,
                         'surat_pernyataan_media_cetak'      => $pernyataanmediacetak,
                         'surat_pernyataan_jumlah_oplah'     => $pernyataanoplah,
                         'created_at'                        => Carbon::now(),
@@ -239,7 +250,9 @@ class PengajuanController extends Controller
                         'surat_kuasa'                       => $suratkuasa,
                         'sertifikat_verif_dewan_pers'       => $sertifikatpers,
                         'surat_pernyataan_kebenaran'        => $suratkebenaran,
+                        'sertifikat_ukw'                    => $sertifikatukw,
                         'link_e_katalog'                    => $request->link_katalog,
+                        'catatan'                           => $request->catatan,
                         'izin_siaran_media_elektronik'      => $suratizin,
                         'surat_pernyataan_media_elektronik' => $pernyataanmediaelektronik,
                         'created_at'                        => Carbon::now(),
@@ -290,7 +303,9 @@ class PengajuanController extends Controller
                         'surat_kuasa'                         => $suratkuasa,
                         'sertifikat_verif_dewan_pers'         => $sertifikatpers,
                         'surat_pernyataan_kebenaran'          => $suratkebenaran,
+                        'sertifikat_ukw'                      => $sertifikatukw,
                         'link_e_katalog'                      => $request->link_katalog,
+                        'catatan'                             => $request->catatan,
                         'surat_pernyataan_media_siber'        => $pernyataanmediasiber,
                         'screenshoot_perusahaan_media_siber'  => $screenshootweb,
                         'screenshoot_data_pengunjung_web'     => $screenshootdatapengunjung,
@@ -341,6 +356,7 @@ class PengajuanController extends Controller
                 public_path('pengajuan/surat_kuasa/' . $pengajuan->surat_kuasa),
                 public_path('pengajuan/sertifikat_pers/' . $pengajuan->sertifikat_verif_dewan_pers),
                 public_path('pengajuan/surat_kebenaran/' . $pengajuan->surat_pernyataan_kebenaran),
+                public_path('pengajuan/sertifikat_ukw/' . $pengajuan->sertifikat_ukw),
                 // MEDIA CETAK
                 public_path('pengajuan/pernyataan_media_cetak/' . $pengajuan->surat_pernyataan_media_cetak),
                 public_path('pengajuan/pernyataan_oplah/' . $pengajuan->surat_pernyataan_jumlah_oplah),
@@ -371,6 +387,7 @@ class PengajuanController extends Controller
                 public_path('pengajuan/surat_kuasa/' . $pengajuan->surat_kuasa),
                 public_path('pengajuan/sertifikat_pers/' . $pengajuan->sertifikat_verif_dewan_pers),
                 public_path('pengajuan/surat_kebenaran/' . $pengajuan->surat_pernyataan_kebenaran),
+                public_path('pengajuan/sertifikat_ukw/' . $pengajuan->sertifikat_ukw),
                 // MEDIA ELEKTRONIK
                 public_path('pengajuan/surat_izin/' . $pengajuan->izin_siaran_media_elektronik),
                 public_path('pengajuan/pernyataan_media_elektronik/' . $pengajuan->surat_pernyataan_media_elektronik),
@@ -401,6 +418,7 @@ class PengajuanController extends Controller
                 public_path('pengajuan/surat_kuasa/' . $pengajuan->surat_kuasa),
                 public_path('pengajuan/sertifikat_pers/' . $pengajuan->sertifikat_verif_dewan_pers),
                 public_path('pengajuan/surat_kebenaran/' . $pengajuan->surat_pernyataan_kebenaran),
+                public_path('pengajuan/sertifikat_ukw/' . $pengajuan->sertifikat_ukw),
                 // MEDIA SIBER
                 public_path('pengajuan/pernyataan_media_siber/' . $pengajuan->surat_pernyataan_media_siber),
                 public_path('pengajuan/screenshoot_web/' . $pengajuan->screenshoot_perusahaan_media_siber),

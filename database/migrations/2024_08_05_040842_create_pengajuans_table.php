@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('surat_kuasa');
             $table->string('sertifikat_verif_dewan_pers');
             $table->string('surat_pernyataan_kebenaran');
+            $table->string('sertifikat_ukw');
             $table->string('link_e_katalog');
             $table->string('surat_pernyataan_media_cetak')->nullable();
             $table->string('surat_pernyataan_jumlah_oplah')->nullable();
@@ -39,6 +40,7 @@ return new class extends Migration
             $table->string('screenshoot_perusahaan_media_siber')->nullable();
             $table->string('screenshoot_data_pengunjung_web')->nullable();
             $table->string('status')->default('proses');
+            $table->text('catatan')->nullable();
             $table->timestamps();
         });
     }
