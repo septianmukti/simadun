@@ -31,8 +31,7 @@ class VerifController extends Controller
         return view('admin.detail-verif-pengajuan', ['pengajuan' => $pengajuan]);
     }
 
-    // APPROVE OR REJECT PENGAJUAN EDIT
-    public function ApprovedPengajuan($id)
+    public function SimpanPengajuan(Request $request, $id)
     {
         if (!Auth::check()) {
             return redirect('login');
@@ -40,25 +39,15 @@ class VerifController extends Controller
         if (Auth::user()->role != 'admin') {
             abort(403);
         }
-        $pengajuan = Pengajuan::find($id);
-        $pengajuan->update([
-            'status'         => 'disetujui'
-        ]);
-        return redirect()->route('list.verif.pengajuan')->with(['success' => 'Pengajuan Berhasil Disetujui!']);
-    }
-
-    public function RejectPengajuan($id)
-    {
-        if (!Auth::check()) {
-            return redirect('login');
+        try {
+            $pengajuan = Pengajuan::find($id);
+            $pengajuan->update([
+                'catatan'   => $request->catatan,
+                'status'    => $request->status,
+            ]);
+            return redirect()->route('list.verif.pengajuan')->with(['success' => 'Pengajuan Berhasil Disimpan!']);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        if (Auth::user()->role != 'admin') {
-            abort(403);
-        }
-        $pengajuan = Pengajuan::find($id);
-        $pengajuan->update([
-            'status'         => 'ditolak'
-        ]);
-        return redirect()->route('list.verif.pengajuan')->with(['success' => 'Pengajuan Berhasil Ditolak!']);
     }
 }

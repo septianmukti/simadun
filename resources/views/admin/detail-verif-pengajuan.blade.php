@@ -158,7 +158,7 @@
                       </tr>
                       <tr>
                         <td class="text-center">17.</td>
-                        <td>Link e-Katalog</td>
+                        <td>Link e-Katalog / 6</td>
                         <td>
                           <a class="btn btn-sm btn-outline-primary-2x" type="button" title="Kunjungi Katalog" target="_blank" href="{{ url($pengajuan->link_e_katalog) }}">Lihat</a>
                         </td>
@@ -222,44 +222,38 @@
               </div>
               <div class="card-footer">
                 <div class="row">
-                  <div class="col-sm-12">
-                    <div class="mb-3">
-                      <label>CATATAN *</label>
-                      <textarea class="form-control input-air-primary" name="catatan" id="exampleFormControlTextarea4" placeholder="Masukkan Catatan" rows="3">{{$pengajuan->catatan}}</textarea>
+                  <form action="{{ route('simpan.pengajuan', $pengajuan->id) }}" method="POST" style="display: inline-block;">
+                    @csrf
+                    @method('PUT')
+                    <div class="col-sm-12">
+                      <div class="mb-3">
+                        <label>** CATATAN</label>
+                        <textarea class="form-control input-air-primary" name="catatan" placeholder="Masukkan Catatan" rows="5">{{$pengajuan->catatan}}</textarea>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="text-end">
-                      @if ($pengajuan->status == 'proses')
-                      <form action="{{ route('approved.pengajuan', $pengajuan->id) }}" method="POST" style="display: inline-block;">
-                        @csrf
-                        @method('PUT')
-                        <a type="submit" onclick="return false" class="btn btn-success me-1 approved-confirm" data-toggle="tooltip" title='Setujui'>Setujui</a>
-                      </form>
-                      <form action="{{ route('reject.pengajuan', $pengajuan->id) }}" method="POST" style="display: inline-block;">
-                        @csrf
-                        @method('PUT')
-                        <a type="submit" onclick="return false" class="btn btn-danger me-1 reject-confirm" data-toggle="tooltip" title='Tolak'>Tolak</a>
-                      </form>
-                      @elseif ($pengajuan->status == 'ditolak')
-                      <form action="{{ route('approved.pengajuan', $pengajuan->id) }}" method="POST" style="display: inline-block;">
-                        @csrf
-                        @method('PUT')
-                        <a type="submit" onclick="return false" class="btn btn-success me-1 approved-confirm" data-toggle="tooltip" title='Setujui'>Setujui</a>
-                      </form>
-                      @elseif ($pengajuan->status == 'disetujui')
-                      <form action="{{ route('reject.pengajuan', $pengajuan->id) }}" method="POST" style="display: inline-block;">
-                        @csrf
-                        @method('PUT')
-                        <a type="submit" onclick="return false" class="btn btn-danger me-1 reject-confirm" data-toggle="tooltip" title='Tolak'>Tolak</a>
-                      </form>
-                      @endif
-                      <a class="btn btn-secondary" href="{{ route('list.verif.pengajuan') }}">Kembali</a>
+                    <div class="col-sm-12">
+                      <div class="mb-3">
+                        <div class="card-wrapper border rounded-3 h-100 checkbox-checked">
+                          <h6 class="sub-title">Pilih Status Pengajuan</h6>
+                          <div class="form-check radio radio-success">
+                            <input class="form-check-input" id="radio55" type="radio" name="status" value="disetujui" {{ ($pengajuan->status=="disetujui")? "checked" : "" }}>
+                            <label class="form-check-label" for="radio55">Setuju </label>
+                          </div>
+                          <div class="form-check radio radio-danger">
+                            <input class="form-check-input" id="radio44" type="radio" name="status" value="ditolak" {{ ($pengajuan->status=="ditolak")? "checked" : "" }}>
+                            <label class="form-check-label" for="radio44">Tolak </label>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                    <div class="col-sm-12">
+                      <div class="text-end">
+                        <a type="submit" onclick="return false" class="btn btn-success me-1 confirm" data-toggle="tooltip" title='Simpan'>Simpan</a>
+                        <a class="btn btn-secondary" href="{{ route('list.verif.pengajuan') }}">Kembali</a>
+                      </div>
+                    </div>
+                  </form>
+                </div> 
               </div>
             </div>
           </div>
@@ -283,30 +277,12 @@
       });
     </script>
     <script type="text/javascript">
-      $('.approved-confirm').on('click', function (e) {
+      $('.confirm').on('click', function (e) {
         e.preventDefault();
         let form = $(this).closest('form');
         swal({
-          title: `Setujui Pengajuan?`,
-          text: "Anda akan menyetujui pengajuan kerjasama ini.",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        })
-        .then((willApproved) => {
-          if (willApproved) {
-            form.submit();
-          }
-        });
-      });
-    </script>
-    <script type="text/javascript">
-      $('.reject-confirm').on('click', function (e) {
-        e.preventDefault();
-        let form = $(this).closest('form');
-        swal({
-          title: `Tolak Pengajuan?`,
-          text: "Anda akan menolak pengajuan kerjasama ini.",
+          title: `Simpan Pengajuan?`,
+          text: "Pengajuan telah selesai di verifikasi dan akan di dimpan.",
           icon: "warning",
           buttons: true,
           dangerMode: true,

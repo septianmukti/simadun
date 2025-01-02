@@ -74,8 +74,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'hsts'])->g
         Route::controller(VerifController::class)->group(function () {
             Route::get('/list-verif-pengajuan', 'ListVerifPengajuan')->name('list.verif.pengajuan');
             Route::get('/detail-verif-pengajuan/{id}', 'DetailPengajuan')->name('detail.verif.pengajuan');
-            Route::put('/approved-pengajuan/{id}', 'ApprovedPengajuan')->name('approved.pengajuan');
-            Route::put('/reject-pengajuan/{id}', 'RejectPengajuan')->name('reject.pengajuan');
+            Route::put('/simpan-pengajuan/{id}', 'SimpanPengajuan')->name('simpan.pengajuan');
         });
     });
 });

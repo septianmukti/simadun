@@ -157,7 +157,7 @@
                       </tr>
                       <tr>
                         <td class="text-center">17.</td>
-                        <td>Link e-Katalog</td>
+                        <td>Link e-Katalog / V6</td>
                         <td>
                           <a class="btn btn-sm btn-outline-primary-2x" type="button" title="Kunjungi Katalog" target="_blank" href="{{ url($pengajuan->link_e_katalog) }}">Lihat</a>
                         </td>
@@ -224,7 +224,7 @@
                   <div class="col-sm-12">
                     <div class="mb-3">
                       <label>CATATAN *</label>
-                      <textarea class="form-control input-air-primary" id="exampleFormControlTextarea4" rows="3" disabled="">{{$pengajuan->catatan}}</textarea>
+                      <textarea class="form-control input-air-primary" rows="5" disabled="">{{$pengajuan->catatan}}</textarea>
                     </div>
                   </div>
                 </div>

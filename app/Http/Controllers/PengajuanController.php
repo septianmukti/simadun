@@ -50,7 +50,6 @@ class PengajuanController extends Controller
                 'surat_kebenaran' => 'required|mimes:pdf|max:3072',
                 'sertifikat_ukw' => 'required|mimes:pdf|max:3072',
                 'link_katalog' => ['required', 'string', 'max:255'],
-                'catatan' => ['string', 'max:255'],
             ]);
             try {
                 if ($request->surat_kerjasama != '') {
@@ -207,7 +206,6 @@ class PengajuanController extends Controller
                         'surat_pernyataan_kebenaran'        => $suratkebenaran,
                         'sertifikat_ukw'                    => $sertifikatukw,
                         'link_e_katalog'                    => $request->link_katalog,
-                        'catatan'                           => $request->catatan,
                         'surat_pernyataan_media_cetak'      => $pernyataanmediacetak,
                         'surat_pernyataan_jumlah_oplah'     => $pernyataanoplah,
                         'created_at'                        => Carbon::now(),
@@ -252,7 +250,6 @@ class PengajuanController extends Controller
                         'surat_pernyataan_kebenaran'        => $suratkebenaran,
                         'sertifikat_ukw'                    => $sertifikatukw,
                         'link_e_katalog'                    => $request->link_katalog,
-                        'catatan'                           => $request->catatan,
                         'izin_siaran_media_elektronik'      => $suratizin,
                         'surat_pernyataan_media_elektronik' => $pernyataanmediaelektronik,
                         'created_at'                        => Carbon::now(),
@@ -305,7 +302,6 @@ class PengajuanController extends Controller
                         'surat_pernyataan_kebenaran'          => $suratkebenaran,
                         'sertifikat_ukw'                      => $sertifikatukw,
                         'link_e_katalog'                      => $request->link_katalog,
-                        'catatan'                             => $request->catatan,
                         'surat_pernyataan_media_siber'        => $pernyataanmediasiber,
                         'screenshoot_perusahaan_media_siber'  => $screenshootweb,
                         'screenshoot_data_pengunjung_web'     => $screenshootdatapengunjung,
