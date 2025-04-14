@@ -171,7 +171,7 @@ class PengajuanController extends Controller
                         'pernyataan_media_cetak' => 'required|mimes:pdf|max:3072',
                         'pernyataan_oplah' => 'required|mimes:pdf|max:3072',
                     ]);
-                    
+
                     if ($request->pernyataan_media_cetak != '') {
                         $random = Str::random(40);
                         $file = $request->file('pernyataan_media_cetak');
@@ -360,12 +360,10 @@ class PengajuanController extends Controller
             foreach ($filesDelete as $file) {
                 if (file_exists($file)) {
                     unlink($file);
-                } else {
-                    return back()->with('error', 'Pengajuan Gagal Dihapus!');
                 }
             }
-            Pengajuan::where('id', $id)->delete();
-            return back()->with('success', 'Pengajuan Berhasil Dihapus');
+            $pengajuan->delete();
+            return response()->json(['success' => 'Pengajuan Berhasil Dihapus!']);
         } elseif (Pengajuan::where('user_jenis_perusahaan' == 'media-elektronik')) {
             $filesDelete = [
                 public_path('pengajuan/surat_kerjasama/' . $pengajuan->surat_permohonan_kerjasama),
@@ -391,12 +389,10 @@ class PengajuanController extends Controller
             foreach ($filesDelete as $file) {
                 if (file_exists($file)) {
                     unlink($file);
-                } else {
-                    return back()->with('error', 'Pengajuan Gagal Dihapus!');
                 }
             }
-            Pengajuan::where('id', $id)->delete();
-            return back()->with('success', 'Pengajuan Berhasil Dihapus');
+            $pengajuan->delete();
+            return response()->json(['success' => 'Pengajuan Berhasil Dihapus!']);
         } elseif (Pengajuan::where('user_jenis_perusahaan' == 'media-siber')) {
             $filesDelete = [
                 public_path('pengajuan/surat_kerjasama/' . $pengajuan->surat_permohonan_kerjasama),
@@ -423,12 +419,10 @@ class PengajuanController extends Controller
             foreach ($filesDelete as $file) {
                 if (file_exists($file)) {
                     unlink($file);
-                } else {
-                    return back()->with('error', 'Pengajuan Gagal Dihapus!');
                 }
             }
-            Pengajuan::where('id', $id)->delete();
-            return back()->with('success', 'Pengajuan Berhasil Dihapus');
+            $pengajuan->delete();
+            return response()->json(['success' => 'Pengajuan Berhasil Dihapus!']);
         }
     }
 }

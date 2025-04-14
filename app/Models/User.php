@@ -68,8 +68,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
-    public function pengajuan() {
-        return $this->belongsTo(Pengajuan::class, 'user_id');
-    }
 }

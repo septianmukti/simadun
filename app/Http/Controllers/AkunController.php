@@ -10,17 +10,21 @@ class AkunController extends Controller
 {
     public function ViewApprovalAkun()
     {
-        $userinactive = User::where('id', '!=', Auth::user()->id)
-            ->where('account_status', '=', 'inactive')
-            ->orderBy('id', 'desc')
-            ->get();
+        try {
+            $userinactive = User::where('id', '!=', Auth::user()->id)
+                ->where('account_status', '=', 'inactive')
+                ->orderBy('id', 'desc')
+                ->get();
 
-        $useractive = User::where('id', '!=', Auth::user()->id)
-            ->where('account_status', '=', 'active')
-            ->orderBy('id', 'desc')
-            ->get();
+            $useractive = User::where('id', '!=', Auth::user()->id)
+                ->where('account_status', '=', 'active')
+                ->orderBy('id', 'desc')
+                ->get();
 
-        return view('admin.account-approval', ['userinactive' => $userinactive, 'useractive' => $useractive]);
+            return view('admin.account-approval', ['userinactive' => $userinactive, 'useractive' => $useractive]);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
+        }
     }
 
     public function ActiveAccount($id)

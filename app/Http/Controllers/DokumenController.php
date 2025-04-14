@@ -13,11 +13,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/surat_kerjasama/' . $surat_kerjasama);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/surat_kerjasama/' . $surat_kerjasama);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function akta_pendirian($akta_pendirian)
@@ -25,11 +29,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/akta_pendirian/' . $akta_pendirian);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/akta_pendirian/' . $akta_pendirian);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function bukti_pengesahan($bukti_pengesahan)
@@ -37,11 +45,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/bukti_pengesahan/' . $bukti_pengesahan);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/bukti_pengesahan/' . $bukti_pengesahan);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function nib_siup_situ($nib_siup_situ)
@@ -49,11 +61,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/nib_siup_situ/' . $nib_siup_situ);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/nib_siup_situ/' . $nib_siup_situ);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function sk_domisili_perusahaan($sk_domisili_perusahaan)
@@ -61,11 +77,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/sk_domisili_perusahaan/' . $sk_domisili_perusahaan);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/sk_domisili_perusahaan/' . $sk_domisili_perusahaan);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function npwp_perusahaan($npwp_perusahaan)
@@ -73,11 +93,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/npwp_perusahaan/' . $npwp_perusahaan);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/npwp_perusahaan/' . $npwp_perusahaan);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function spt($spt)
@@ -85,11 +109,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/spt/' . $spt);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/spt/' . $spt);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function harga($harga)
@@ -97,11 +125,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/harga/' . $harga);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/harga/' . $harga);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function referend_rekening($referend_rekening)
@@ -109,11 +141,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/referend_rekening/' . $referend_rekening);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/referend_rekening/' . $referend_rekening);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function surat_tugas($surat_tugas)
@@ -121,11 +157,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/surat_tugas/' . $surat_tugas);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/surat_tugas/' . $surat_tugas);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function kartu_pers($kartu_pers)
@@ -133,11 +173,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/kartu_pers/' . $kartu_pers);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/kartu_pers/' . $kartu_pers);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function surat_penanggungjawab($surat_penanggungjawab)
@@ -145,11 +189,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/surat_penanggungjawab/' . $surat_penanggungjawab);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/surat_penanggungjawab/' . $surat_penanggungjawab);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function surat_kuasa($surat_kuasa)
@@ -157,11 +205,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/surat_kuasa/' . $surat_kuasa);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/surat_kuasa/' . $surat_kuasa);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function sertifikat_pers($sertifikat_pers)
@@ -169,11 +221,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/sertifikat_pers/' . $sertifikat_pers);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/sertifikat_pers/' . $sertifikat_pers);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function surat_kebenaran($surat_kebenaran)
@@ -181,11 +237,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/surat_kebenaran/' . $surat_kebenaran);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/surat_kebenaran/' . $surat_kebenaran);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function sertifikat_ukw($sertifikat_ukw)
@@ -193,11 +253,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/sertifikat_ukw/' . $sertifikat_ukw);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/sertifikat_ukw/' . $sertifikat_ukw);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     // MEDIA CETAK
@@ -206,11 +270,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/pernyataan_media_cetak/' . $pernyataan_media_cetak);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/pernyataan_media_cetak/' . $pernyataan_media_cetak);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function pernyataan_oplah($pernyataan_oplah)
@@ -218,11 +286,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/pernyataan_oplah/' . $pernyataan_oplah);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/pernyataan_oplah/' . $pernyataan_oplah);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     // MEDIA ELEKTRONIK
@@ -231,11 +303,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/surat_izin/' . $surat_izin);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/surat_izin/' . $surat_izin);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function pernyataan_media_elektronik($pernyataan_media_elektronik)
@@ -243,11 +319,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/pernyataan_media_elektronik/' . $pernyataan_media_elektronik);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/pernyataan_media_elektronik/' . $pernyataan_media_elektronik);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     // MEDIA SIBER
@@ -256,11 +336,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/pernyataan_media_siber/' . $pernyataan_media_siber);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/pernyataan_media_siber/' . $pernyataan_media_siber);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function screenshoot_web($screenshoot_web)
@@ -268,11 +352,15 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/screenshoot_web/' . $screenshoot_web);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/screenshoot_web/' . $screenshoot_web);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 
     public function screenshoot_data_pengunjung($screenshoot_data_pengunjung)
@@ -280,10 +368,14 @@ class DokumenController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $file_path = public_path('pengajuan/screenshoot_data_pengunjung/' . $screenshoot_data_pengunjung);
-        if (!file_exists($file_path)) {
-            abort(404, 'File not found');
+        try {
+            $file_path = public_path('pengajuan/screenshoot_data_pengunjung/' . $screenshoot_data_pengunjung);
+            if (!file_exists($file_path)) {
+                abort(404, 'File not found');
+            }
+            return response()->file($file_path);
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
-        return response()->file($file_path);
     }
 }

@@ -69,11 +69,7 @@
                         <td class="text-center">
                           <a class="btn btn-pill btn-outline-primary btn-air-primary btn-sm m-b-5" type="button" title="Lihat" href="{{ route('lihat-pengajuan', $pengajuans->id) }}">Lihat</a>
                           @if ($pengajuans->status == 'proses')
-                          <form action="{{ route('delete.pengajuan', $pengajuans->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <a type="submit" onclick="return false" class="btn btn-pill btn-outline-danger btn-air-danger btn-sm delete-confirm" data-toggle="tooltip" title='Hapus'>Hapus</a>
-                          </form>
+                          <a href="{{ route('delete.pengajuan', $pengajuans->id) }}" onclick="confirmation(event)" class="btn btn-pill btn-outline-danger btn-air-danger btn-sm delete-confirm" data-toggle="tooltip" title='Hapus'>Hapus</a>
                           @endif
                         </td>
                       </tr>
@@ -96,23 +92,43 @@
     <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
     <script>
       $("#pengajuan-list").DataTable();
-    </script>
-    <script type="text/javascript">
-      $('.delete-confirm').on('click', function (e) {
-        e.preventDefault();
-        let form = $(this).closest('form');
-        swal({
-          title: `Anda Yakin?`,
+      function confirmation(ev) {
+        ev.preventDefault();
+        var urlToRedirect = ev.currentTarget.getAttribute('href');
+        console.log(urlToRedirect);
+        new swal({
+          title: "Anda Yakin?",
           text: "Pengajuan yang dihapus tidak dapat dikembalikan.",
           icon: "error",
           buttons: true,
           dangerMode: true,
         })
-        .then((willDelete) => {
-          if (willDelete) {
-            form.submit();
-          }
-        });
-      });
+          .then((willCancel) => {
+            if (willCancel) {
+              $.ajaxSetup({
+                headers: {
+                  "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+              });
+              $.ajax({
+                type: "DELETE",
+                url: urlToRedirect,
+                data: {
+                  dataType: 'json',
+                  contentType: 'application/json',
+                },
+                success: function(data) {
+                  swal("Pengajuan berhasil dihapus.", {
+                    title: "Sukses!",
+                    icon: "success",
+                    buttons: false,
+                    timer: 5000,
+                  });
+                  location.href = location.href;
+                },
+              });
+            }
+          });
+      }
     </script>
 @endsection

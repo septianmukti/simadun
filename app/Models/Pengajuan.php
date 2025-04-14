@@ -38,8 +38,4 @@ class Pengajuan extends Model
         'status',
         'catatan'
     ];
-
-    public function users() {
-        return $this->HasMany(User::class);
-    }
 }
