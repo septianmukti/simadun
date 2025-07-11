@@ -33,6 +33,9 @@
               </div>
               <div class="card-body">
                 @include('../components/notif')
+                @if ($pengajuan->isEmpty())
+                <a class="btn btn-success mb-3" type="button" data-bs-toggle="tooltip" title="Buat Pengajuan" href="{{ route('view-form-pengajuan') }}">Buat Pengajuan</a>
+                @endif
                 <div class="table-responsive theme-scrollbar">
                   <table class="display" id="pengajuan-list">
                     <thead>
@@ -64,12 +67,14 @@
                           <span class="badge badge-danger">{{strtoupper($pengajuans->status)}}</span>
                           @elseif ($pengajuans->status == 'disetujui')
                           <span class="badge badge-success">{{strtoupper($pengajuans->status)}}</span>
+                          @elseif ($pengajuans->status == 'perbaikan')
+                          <span class="badge badge-secondary">{{strtoupper($pengajuans->status)}}</span>
                           @endif
                         </td>
                         <td class="text-center">
                           <a class="btn btn-pill btn-outline-primary btn-air-primary btn-sm m-b-5" type="button" title="Lihat" href="{{ route('lihat-pengajuan', $pengajuans->id) }}">Lihat</a>
                           @if ($pengajuans->status == 'proses')
-                          <a href="{{ route('delete.pengajuan', $pengajuans->id) }}" onclick="confirmation(event)" class="btn btn-pill btn-outline-danger btn-air-danger btn-sm delete-confirm" data-toggle="tooltip" title='Hapus'>Hapus</a>
+                          <a href="{{ route('delete.pengajuan', $pengajuans->id) }}" class="btn btn-pill btn-outline-danger btn-air-danger btn-sm btn-hapus" data-toggle="tooltip" title='Hapus'>Hapus</a>
                           @endif
                         </td>
                       </tr>
@@ -91,44 +96,58 @@
     <script src="{{ asset('assets/js/height-equal.js') }}"></script>
     <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
     <script>
-      $("#pengajuan-list").DataTable();
-      function confirmation(ev) {
-        ev.preventDefault();
-        var urlToRedirect = ev.currentTarget.getAttribute('href');
-        console.log(urlToRedirect);
-        new swal({
-          title: "Anda Yakin?",
-          text: "Pengajuan yang dihapus tidak dapat dikembalikan.",
-          icon: "error",
-          buttons: true,
-          dangerMode: true,
-        })
-          .then((willCancel) => {
-            if (willCancel) {
+      $(document).ready(function() {
+        // Inisialisasi DataTable
+        $("#pengajuan-list").DataTable();
+
+        // Konfirmasi hapus
+        $(document).on('click', '.btn-hapus', function(ev) {
+          ev.preventDefault();
+          const urlToRedirect = $(this).attr('href');
+
+          swal({
+            title: "Anda Yakin?",
+            text: "Pengajuan yang dihapus tidak dapat dikembalikan.",
+            icon: "warning",
+            buttons: {
+              cancel: "Batal",
+              confirm: {
+                text: "Ya, Hapus!",
+                value: true,
+                visible: true,
+                className: "btn-danger"
+              }
+            },
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
               $.ajaxSetup({
                 headers: {
                   "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
               });
+
               $.ajax({
                 type: "DELETE",
                 url: urlToRedirect,
-                data: {
-                  dataType: 'json',
-                  contentType: 'application/json',
-                },
                 success: function(data) {
-                  swal("Pengajuan berhasil dihapus.", {
-                    title: "Sukses!",
-                    icon: "success",
-                    buttons: false,
-                    timer: 5000,
-                  });
-                  location.href = location.href;
+                  sessionStorage.setItem('deleted', 'true');
+                  location.reload();
                 },
+                error: function(xhr, status, error) {
+                  swal("Gagal!", "Terjadi kesalahan saat menghapus: " + error, "error");
+                }
               });
             }
           });
-      }
+        });
+
+        // Reload setelah hapus
+        if (sessionStorage.getItem('deleted') === 'true') {
+          swal("Sukses!", "Pengajuan berhasil dihapus.", "success");
+          sessionStorage.removeItem('deleted');
+        }
+      });
     </script>
 @endsection

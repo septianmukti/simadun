@@ -27,7 +27,7 @@
                         <form class="theme-form" method="POST" action="{{ route('login') }}">
                             @csrf
                             <h4>Login</h4>
-                            <p>Masukkan email & password anda untuk login</p>
+                            <p class="mb-2">Masukkan email & password anda untuk login</p>
                             <div class="form-group">
                                 <label class="col-form-label">Email Address</label>
                                 <input class="form-control" type="email" name="email" required="" placeholder="Test@gmail.com">
@@ -39,8 +39,13 @@
                                     <div class="show-hide"><span class="show"> </span></div>
                                 </div>
                             </div>
-                            <div class="form-group mb-0 mt-5">
+                            <div class="form-group mb-0 mt-4">
                                 <button class="btn btn-primary btn-block w-100" type="submit">Login</button>
+                            </div>
+                            <div class="social mt-2 text-center">
+                                <div class="btn-showcase">
+                                    <a class="btn btn-outline-info" href="{{ route('index') }}">Halaman Utama </a>
+                                </div>
                             </div>
                             <p class="mt-4 mb-0 text-center">Belum punya akun?<a class="ms-2" href="{{ route('register') }}">Buat Akun</a></p>
                         </form>

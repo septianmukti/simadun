@@ -1,7 +1,7 @@
 @extends('../layouts/admin/main')
 
 @section('tittle')
-    <title>Semua Pengajuan Kerja Sama - Aplikasi SiMadun Pemerintah Kabupaten Madiun</title>
+    <title>Akun Aktif - Aplikasi SiMadun Pemerintah Kabupaten Madiun</title>
 @endsection
 
 @section('css')
@@ -12,11 +12,11 @@
 
 @section('breadcrumb')
     <div class="col-4 col-xl-4 page-title">
-      <h4 class="f-w-700">Semua Pengajuan Kerja Sama</h4>
+      <h4 class="f-w-700">Akun Aktif</h4>
       <nav>
         <ol class="breadcrumb justify-content-sm-start align-items-center mb-0">
           <li class="breadcrumb-item"><a href="{{ route('view-dashboard') }}"> <i data-feather="home"> </i></a></li>
-          <li class="breadcrumb-item f-w-400 active">Semua Pengajuan Kerja Sama</li>
+          <li class="breadcrumb-item f-w-400 active">Akun Aktif</li>
         </ol>
       </nav>
     </div>
@@ -24,54 +24,59 @@
 
 @section('page-body')
     <div class="page-body">
-        <!-- Container-fluid starts-->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-12">
+      <!-- Container-fluid starts-->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
-                <h4>Semua Pengajuan Kerja Sama </h4><span>Semua Pengajuan Kerja Sama Media dan Dinas Komunikasi dan Informatika Kabupaten Madiun.</span>
+                <h4>Akun Aktif </h4><span>Semua Akun dibawah ini merupakan semua Akun yang telah aktif di Aplikasi SiMadun dan sudah di Approve/Setujui oleh Admin.</span>
               </div>
               <div class="card-body">
-                @include('../components/notif')
                 <div class="table-responsive theme-scrollbar">
-                  <table class="display" id="pengajuan-list">
+                  <table class="display" id="list-account-active">
                     <thead>
                       <tr>
                         <th>No.</th>
+                        <th>Nama Lengkap Wartawan</th>
                         <th>Email</th>
-                        <th>Nama Perusahaan</th>
-                        <th>Jenis Perusahaan</th>
+                        <th>Nomor Telepon</th>
                         <th>Nama Media</th>
-                        <th>Tanggal Pengajuan</th>
-                        <th>Status Pengajuan</th>
-                        <th class="text-center" data-orderable="false">Action</th>
+                        <th>Status Akun</th>
+                        <th>Tanggal Approve</th>
+                        <th>Role</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       @php $no = 1; @endphp
-                      @foreach ($pengajuan as $pengajuans)
+                      @foreach ($useractive as $active)
                       <tr>
                         <td>{{ $no++ }}.</td>
-                        <td>{{ $pengajuans->email }}</td>
-                        <td>{{ $pengajuans->nama_perusahaan }}</td>
-                        <td>{{ $pengajuans->user_jenis_perusahaan }}</td>
-                        <td>{{ $pengajuans->media_name }}</td>
-                        <td>{{ $pengajuans->created_at }}</td>
+                        <td>{{ucfirst($active->name)}}</td>
+                        <td>{{$active->email}}</td>
+                        <td>{{$active->no_hp}}</td>
+                        <td>{{$active->media_name}}</td>
+                        <td> <span class="badge badge-success">{{ucfirst($active->account_status)}}</span></td>
+                        <td>{{$active->updated_at}}</td>
                         <td>
-                          @if ($pengajuans->status == 'proses')
-                          <span class="badge badge-warning">{{strtoupper($pengajuans->status)}}</span>
-                          @elseif ($pengajuans->status == 'ditolak')
-                          <span class="badge badge-danger">{{strtoupper($pengajuans->status)}}</span>
-                          @elseif ($pengajuans->status == 'disetujui')
-                          <span class="badge badge-success">{{strtoupper($pengajuans->status)}}</span>
-                          @elseif ($pengajuans->status == 'perbaikan')
-                          <span class="badge badge-secondary">{{strtoupper($pengajuans->status)}}</span>
+                          @if ($active->role == 'user')
+                          <span class="badge badge-light-success">{{ucfirst($active->role)}}</span>
+                          @elseif ($active->role == 'admin')
+                          <span class="badge badge-light-danger">{{ucfirst($active->role)}}</span>
                           @endif
                         </td>
-                        <td class="text-center">
-                          <a class="btn btn-pill btn-outline-primary btn-air-primary btn-sm m-b-5" type="button" title="Lihat" href="{{ route('detail.verif.pengajuan', $pengajuans->id) }}">Lihat</a>
-                          <a href="{{ route('delete.pengajuan', $pengajuans->id) }}" class="btn btn-pill btn-outline-danger btn-air-danger btn-sm delete-confirm" data-toggle="tooltip" title="Hapus">Hapus</a>
+                        <td>
+                          @if ($active->role === 'user')
+                          <ul class="action">
+                            <li class="edit">
+                              <a href="#" class="btn btn-xs btn-outline-secondary btn-air-secondary" data-toggle="tooltip" title="Edit">Edit</a>
+                            </li>
+                            <li>
+                              <a href="{{ route('delete.aktif.akun', $active->id) }}" class="btn btn-xs btn-outline-danger btn-air-danger btn-delete" data-toggle="tooltip" title="Hapus">Hapus</a>
+                            </li>
+                          </ul>
+                          @endif
                         </td>
                       </tr>
                       @endforeach
@@ -113,7 +118,7 @@
     <script>
       $(document).ready(function () {
         // Inisialisasi DataTables
-        const table = $("#pengajuan-list").DataTable({
+        const table = $("#list-account-active").DataTable({
           dom: "Bfrtip",
           buttons: [
             {
@@ -138,12 +143,12 @@
           }
         });
         // Konfirmasi hapus
-        $(document).on('click', '.delete-confirm', function(ev) {
+        $(document).on('click', '.btn-delete', function(ev) {
           ev.preventDefault();
           const urlToRedirect = $(this).attr('href');
           swal({
-            title: "Anda Yakin?",
-            text: "Pengajuan yang dihapus tidak dapat dikembalikan.",
+            title: "Hapus akun ini?",
+            text: "Data kerjasama yang sudah diupload juga akan dihapus.",
             icon: "error",
             buttons: {
               cancel: "Batal",
@@ -179,7 +184,7 @@
           });
         });
         if (sessionStorage.getItem('deleted') === 'true') {
-          swal("Sukses!", "Pengajuan berhasil dihapus.", "success");
+          swal("Sukses!", "Akun telah berhasil dihapus.", "success");
           sessionStorage.removeItem('deleted');
         }
       });

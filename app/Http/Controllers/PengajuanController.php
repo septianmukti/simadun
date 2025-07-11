@@ -31,288 +31,142 @@ class PengajuanController extends Controller
 
     public function UploadPengajuan(Request $request)
     {
-        if (Auth::user()->role == 'user') {
-            $request->validate([
-                'surat_kerjasama' => 'required|mimes:pdf|max:3072',
-                'akta_pendirian' => 'required|mimes:pdf|max:3072',
-                'bukti_pengesahan' => 'required|mimes:pdf|max:3072',
-                'nib_siup_situ' => 'required|mimes:pdf|max:3072',
-                'sk_domisili_perusahaan' => 'required|mimes:pdf|max:3072',
-                'npwp_perusahaan' => 'required|mimes:pdf|max:3072',
-                'spt' => 'required|mimes:pdf|max:3072',
-                'harga' => 'required|mimes:pdf|max:3072',
-                'referend_rekening' => 'required|mimes:pdf|max:3072',
-                'surat_tugas' => 'required|mimes:pdf|max:3072',
-                'kartu_pers' => 'required|mimes:pdf|max:3072',
-                'surat_penanggungjawab' => 'required|mimes:pdf|max:3072',
-                'surat_kuasa' => 'required|mimes:pdf|max:3072',
-                'sertifikat_pers' => 'required|mimes:pdf|max:3072',
-                'surat_kebenaran' => 'required|mimes:pdf|max:3072',
-                'sertifikat_ukw' => 'required|mimes:pdf|max:3072',
-                'link_katalog' => ['required', 'string', 'max:255'],
-            ]);
-            try {
-                if ($request->surat_kerjasama != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('surat_kerjasama');
-                    $suratkerjasama = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/surat_kerjasama';
-                    $file->move($path, $suratkerjasama);
-                }
-                if ($request->akta_pendirian != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('akta_pendirian');
-                    $aktapendirian = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/akta_pendirian';
-                    $file->move($path, $aktapendirian);
-                }
-                if ($request->bukti_pengesahan != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('bukti_pengesahan');
-                    $buktipengesahan = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/bukti_pengesahan';
-                    $file->move($path, $buktipengesahan);
-                }
-                if ($request->nib_siup_situ != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('nib_siup_situ');
-                    $nibsiupsitu = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/nib_siup_situ';
-                    $file->move($path, $nibsiupsitu);
-                }
-                if ($request->sk_domisili_perusahaan != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('sk_domisili_perusahaan');
-                    $skdomisiliperusahaan = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/sk_domisili_perusahaan';
-                    $file->move($path, $skdomisiliperusahaan);
-                }
-                if ($request->npwp_perusahaan != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('npwp_perusahaan');
-                    $npwpperusahaan = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/npwp_perusahaan';
-                    $file->move($path, $npwpperusahaan);
-                }
-                if ($request->spt != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('spt');
-                    $spt = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/spt';
-                    $file->move($path, $spt);
-                }
-                if ($request->harga != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('harga');
-                    $harga = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/harga';
-                    $file->move($path, $harga);
-                }
-                if ($request->referend_rekening != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('referend_rekening');
-                    $referendrekening = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/referend_rekening';
-                    $file->move($path, $referendrekening);
-                }
-                if ($request->surat_tugas != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('surat_tugas');
-                    $surattugas = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/surat_tugas';
-                    $file->move($path, $surattugas);
-                }
-                if ($request->kartu_pers != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('kartu_pers');
-                    $kartupers = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/kartu_pers';
-                    $file->move($path, $kartupers);
-                }
-                if ($request->surat_penanggungjawab != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('surat_penanggungjawab');
-                    $suratpenanggungjawab = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/surat_penanggungjawab';
-                    $file->move($path, $suratpenanggungjawab);
-                }
-                if ($request->surat_kuasa != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('surat_kuasa');
-                    $suratkuasa = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/surat_kuasa';
-                    $file->move($path, $suratkuasa);
-                }
-                if ($request->sertifikat_pers != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('sertifikat_pers');
-                    $sertifikatpers = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/sertifikat_pers';
-                    $file->move($path, $sertifikatpers);
-                }
-                if ($request->surat_kebenaran != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('surat_kebenaran');
-                    $suratkebenaran = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/surat_kebenaran';
-                    $file->move($path, $suratkebenaran);
-                }
-                if ($request->sertifikat_ukw != '') {
-                    $random = Str::random(40);
-                    $file = $request->file('sertifikat_ukw');
-                    $sertifikatukw = $random . '.' . $file->getClientOriginalExtension();
-                    $path = 'pengajuan/sertifikat_ukw';
-                    $file->move($path, $sertifikatukw);
-                }
+        if (Auth::user()->role !== 'user') {
+            return abort(403);
+        }
 
-                if (Auth::user()->jenis_perusahaan == 'media-cetak') {
-                    $request->validate([
-                        // media cetak
-                        'pernyataan_media_cetak' => 'required|mimes:pdf|max:3072',
-                        'pernyataan_oplah' => 'required|mimes:pdf|max:3072',
-                    ]);
+        $commonFiles = [
+            'surat_kerjasama',
+            'akta_pendirian',
+            'bukti_pengesahan',
+            'nib_siup_situ',
+            'sk_domisili_perusahaan',
+            'npwp_perusahaan',
+            'spt',
+            'harga',
+            'referend_rekening',
+            'surat_tugas',
+            'kartu_pers',
+            'surat_penanggungjawab',
+            'surat_kuasa',
+            'sertifikat_pers',
+            'surat_kebenaran',
+            'sertifikat_ukw'
+        ];
 
-                    if ($request->pernyataan_media_cetak != '') {
-                        $random = Str::random(40);
-                        $file = $request->file('pernyataan_media_cetak');
-                        $pernyataanmediacetak = $random . '.' . $file->getClientOriginalExtension();
-                        $path = 'pengajuan/pernyataan_media_cetak';
-                        $file->move($path, $pernyataanmediacetak);
-                    }
-                    if ($request->pernyataan_oplah != '') {
-                        $random = Str::random(40);
-                        $file = $request->file('pernyataan_oplah');
-                        $pernyataanoplah = $random . '.' . $file->getClientOriginalExtension();
-                        $path = 'pengajuan/pernyataan_oplah';
-                        $file->move($path, $pernyataanoplah);
-                    }
-                    Pengajuan::create([
-                        'user_id'                           => Auth::user()->id,
-                        'user_jenis_perusahaan'             => Auth::user()->jenis_perusahaan,
-                        'surat_permohonan_kerjasama'        => $suratkerjasama,
-                        'akta_pendirian_dan_perubahan'      => $aktapendirian,
-                        'bukti_pengesahan'                  => $buktipengesahan,
-                        'nib_siup_situ'                     => $nibsiupsitu,
-                        'sk_domisili_perusahaan'            => $skdomisiliperusahaan,
-                        'npwp_perusahaan'                   => $npwpperusahaan,
-                        'spt_terakhir'                      => $spt,
-                        'daftar_harga'                      => $harga,
-                        'referend_dan_rekening_bank'        => $referendrekening,
-                        'surat_tugas'                       => $surattugas,
-                        'kartu_pers'                        => $kartupers,
-                        'surat_pernyataan_penanggungjawab'  => $suratpenanggungjawab,
-                        'surat_kuasa'                       => $suratkuasa,
-                        'sertifikat_verif_dewan_pers'       => $sertifikatpers,
-                        'surat_pernyataan_kebenaran'        => $suratkebenaran,
-                        'sertifikat_ukw'                    => $sertifikatukw,
-                        'link_e_katalog'                    => $request->link_katalog,
-                        'surat_pernyataan_media_cetak'      => $pernyataanmediacetak,
-                        'surat_pernyataan_jumlah_oplah'     => $pernyataanoplah,
-                        'created_at'                        => Carbon::now(),
-                    ]);
-                } elseif (Auth::user()->jenis_perusahaan == 'media-elektronik') {
-                    $request->validate([
-                        // media elektronik
-                        'surat_izin' => 'required|mimes:pdf|max:3072',
-                        'pernyataan_media_elektronik' => 'required|mimes:pdf|max:3072',
-                    ]);
-                    if ($request->surat_izin != '') {
-                        $random = Str::random(40);
-                        $file = $request->file('surat_izin');
-                        $suratizin = $random . '.' . $file->getClientOriginalExtension();
-                        $path = 'pengajuan/surat_izin';
-                        $file->move($path, $suratizin);
-                    }
-                    if ($request->pernyataan_media_elektronik != '') {
-                        $random = Str::random(40);
-                        $file = $request->file('pernyataan_media_elektronik');
-                        $pernyataanmediaelektronik = $random . '.' . $file->getClientOriginalExtension();
-                        $path = 'pengajuan/pernyataan_media_elektronik';
-                        $file->move($path, $pernyataanmediaelektronik);
-                    }
-                    Pengajuan::create([
-                        'user_id'                           => Auth::user()->id,
-                        'user_jenis_perusahaan'             => Auth::user()->jenis_perusahaan,
-                        'surat_permohonan_kerjasama'        => $suratkerjasama,
-                        'akta_pendirian_dan_perubahan'      => $aktapendirian,
-                        'bukti_pengesahan'                  => $buktipengesahan,
-                        'nib_siup_situ'                     => $nibsiupsitu,
-                        'sk_domisili_perusahaan'            => $skdomisiliperusahaan,
-                        'npwp_perusahaan'                   => $npwpperusahaan,
-                        'spt_terakhir'                      => $spt,
-                        'daftar_harga'                      => $harga,
-                        'referend_dan_rekening_bank'        => $referendrekening,
-                        'surat_tugas'                       => $surattugas,
-                        'kartu_pers'                        => $kartupers,
-                        'surat_pernyataan_penanggungjawab'  => $suratpenanggungjawab,
-                        'surat_kuasa'                       => $suratkuasa,
-                        'sertifikat_verif_dewan_pers'       => $sertifikatpers,
-                        'surat_pernyataan_kebenaran'        => $suratkebenaran,
-                        'sertifikat_ukw'                    => $sertifikatukw,
-                        'link_e_katalog'                    => $request->link_katalog,
-                        'izin_siaran_media_elektronik'      => $suratizin,
-                        'surat_pernyataan_media_elektronik' => $pernyataanmediaelektronik,
-                        'created_at'                        => Carbon::now(),
-                    ]);
-                } elseif (Auth::user()->jenis_perusahaan == 'media-siber') {
-                    $request->validate([
-                        // media siber
-                        'pernyataan_media_siber' => 'required|mimes:pdf|max:3072',
-                        'screenshoot_web' => 'required|mimes:pdf|max:3072',
-                        'screenshoot_data_pengunjung' => 'required|mimes:pdf|max:3072',
-                    ]);
-                    if ($request->pernyataan_media_siber != '') {
-                        $random = Str::random(40);
-                        $file = $request->file('pernyataan_media_siber');
-                        $pernyataanmediasiber = $random . '.' . $file->getClientOriginalExtension();
-                        $path = 'pengajuan/pernyataan_media_siber';
-                        $file->move($path, $pernyataanmediasiber);
-                    }
-                    if ($request->screenshoot_web != '') {
-                        $random = Str::random(40);
-                        $file = $request->file('screenshoot_web');
-                        $screenshootweb = $random . '.' . $file->getClientOriginalExtension();
-                        $path = 'pengajuan/screenshoot_web';
-                        $file->move($path, $screenshootweb);
-                    }
-                    if ($request->screenshoot_data_pengunjung != '') {
-                        $random = Str::random(40);
-                        $file = $request->file('screenshoot_data_pengunjung');
-                        $screenshootdatapengunjung = $random . '.' . $file->getClientOriginalExtension();
-                        $path = 'pengajuan/screenshoot_data_pengunjung';
-                        $file->move($path, $screenshootdatapengunjung);
-                    }
-                    Pengajuan::create([
-                        'user_id'                             => Auth::user()->id,
-                        'user_jenis_perusahaan'               => Auth::user()->jenis_perusahaan,
-                        'surat_permohonan_kerjasama'          => $suratkerjasama,
-                        'akta_pendirian_dan_perubahan'        => $aktapendirian,
-                        'bukti_pengesahan'                    => $buktipengesahan,
-                        'nib_siup_situ'                       => $nibsiupsitu,
-                        'sk_domisili_perusahaan'              => $skdomisiliperusahaan,
-                        'npwp_perusahaan'                     => $npwpperusahaan,
-                        'spt_terakhir'                        => $spt,
-                        'daftar_harga'                        => $harga,
-                        'referend_dan_rekening_bank'          => $referendrekening,
-                        'surat_tugas'                         => $surattugas,
-                        'kartu_pers'                          => $kartupers,
-                        'surat_pernyataan_penanggungjawab'    => $suratpenanggungjawab,
-                        'surat_kuasa'                         => $suratkuasa,
-                        'sertifikat_verif_dewan_pers'         => $sertifikatpers,
-                        'surat_pernyataan_kebenaran'          => $suratkebenaran,
-                        'sertifikat_ukw'                      => $sertifikatukw,
-                        'link_e_katalog'                      => $request->link_katalog,
-                        'surat_pernyataan_media_siber'        => $pernyataanmediasiber,
-                        'screenshoot_perusahaan_media_siber'  => $screenshootweb,
-                        'screenshoot_data_pengunjung_web'     => $screenshootdatapengunjung,
-                        'created_at'                          => Carbon::now(),
-                    ]);
-                }
-                return redirect('list-pengajuan')
-                    ->with('success', 'Selamat permohonan pengajuan anda telah berhasil dibuat!');
-            } catch (\Throwable $t) {
-                return redirect()->back()->with('error', $t->getMessage());
+        $rules = array_fill_keys($commonFiles, 'required|mimes:pdf|max:3072');
+        $rules['link_katalog'] = ['required', 'string', 'max:255'];
+
+        $request->validate($rules);
+
+        $uploadedFiles = [];
+
+        foreach ($commonFiles as $field) {
+            if ($request->hasFile($field)) {
+                $file = $request->file($field);
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move("pengajuan/{$field}", $filename);
+                $uploadedFiles[$field] = $filename;
             }
+        }
+
+        // Validasi dan upload tambahan berdasarkan jenis perusahaan
+        $jenis = Auth::user()->jenis_perusahaan;
+
+        $additionalFiles = [];
+
+        if ($jenis === 'media-cetak') {
+            $request->validate([
+                'pernyataan_media_cetak' => 'required|mimes:pdf|max:3072',
+                'pernyataan_oplah' => 'required|mimes:pdf|max:3072',
+            ]);
+
+            foreach (['pernyataan_media_cetak', 'pernyataan_oplah'] as $field) {
+                $file = $request->file($field);
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move("pengajuan/{$field}", $filename);
+                $additionalFiles[$field] = $filename;
+            }
+        } elseif ($jenis === 'media-elektronik') {
+            $request->validate([
+                'surat_izin' => 'required|mimes:pdf|max:3072',
+                'pernyataan_media_elektronik' => 'required|mimes:pdf|max:3072',
+            ]);
+
+            foreach (['surat_izin', 'pernyataan_media_elektronik'] as $field) {
+                $file = $request->file($field);
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move("pengajuan/{$field}", $filename);
+                $additionalFiles[$field] = $filename;
+            }
+        } elseif ($jenis === 'media-siber') {
+            $request->validate([
+                'pernyataan_media_siber' => 'required|mimes:pdf|max:3072',
+                'screenshoot_web' => 'required|mimes:pdf|max:3072',
+                'screenshoot_data_pengunjung' => 'required|mimes:pdf|max:3072',
+            ]);
+
+            foreach (['pernyataan_media_siber', 'screenshoot_web', 'screenshoot_data_pengunjung'] as $field) {
+                $file = $request->file($field);
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $file->move("pengajuan/{$field}", $filename);
+                $additionalFiles[$field] = $filename;
+            }
+        }
+
+        try {
+            $pengajuanData = [
+                'user_id' => Auth::user()->id,
+                'user_jenis_perusahaan' => $jenis,
+                'link_e_katalog' => $request->link_katalog,
+                'created_at' => Carbon::now(),
+            ];
+
+            // mapping field database sesuai nama field yang diupload
+            $fieldMapping = [
+                'surat_kerjasama' => 'surat_permohonan_kerjasama',
+                'akta_pendirian' => 'akta_pendirian_dan_perubahan',
+                'bukti_pengesahan' => 'bukti_pengesahan',
+                'nib_siup_situ' => 'nib_siup_situ',
+                'sk_domisili_perusahaan' => 'sk_domisili_perusahaan',
+                'npwp_perusahaan' => 'npwp_perusahaan',
+                'spt' => 'spt_terakhir',
+                'harga' => 'daftar_harga',
+                'referend_rekening' => 'referend_dan_rekening_bank',
+                'surat_tugas' => 'surat_tugas',
+                'kartu_pers' => 'kartu_pers',
+                'surat_penanggungjawab' => 'surat_pernyataan_penanggungjawab',
+                'surat_kuasa' => 'surat_kuasa',
+                'sertifikat_pers' => 'sertifikat_verif_dewan_pers',
+                'surat_kebenaran' => 'surat_pernyataan_kebenaran',
+                'sertifikat_ukw' => 'sertifikat_ukw',
+            ];
+
+            foreach ($uploadedFiles as $inputField => $fileName) {
+                if (isset($fieldMapping[$inputField])) {
+                    $pengajuanData[$fieldMapping[$inputField]] = $fileName;
+                }
+            }
+
+            // tambah field khusus berdasarkan jenis
+            if ($jenis === 'media-cetak') {
+                $pengajuanData['surat_pernyataan_media_cetak'] = $additionalFiles['pernyataan_media_cetak'];
+                $pengajuanData['surat_pernyataan_jumlah_oplah'] = $additionalFiles['pernyataan_oplah'];
+            } elseif ($jenis === 'media-elektronik') {
+                $pengajuanData['izin_siaran_media_elektronik'] = $additionalFiles['surat_izin'];
+                $pengajuanData['surat_pernyataan_media_elektronik'] = $additionalFiles['pernyataan_media_elektronik'];
+            } elseif ($jenis === 'media-siber') {
+                $pengajuanData['surat_pernyataan_media_siber'] = $additionalFiles['pernyataan_media_siber'];
+                $pengajuanData['screenshoot_perusahaan_media_siber'] = $additionalFiles['screenshoot_web'];
+                $pengajuanData['screenshoot_data_pengunjung_web'] = $additionalFiles['screenshoot_data_pengunjung'];
+            }
+
+            Pengajuan::create($pengajuanData);
+
+            return redirect('list-pengajuan')
+                ->with('success', 'Permohonan pengajuan kerjasama Anda telah berhasil dibuat!');
+        } catch (\Throwable $t) {
+            return redirect()->back()->with('error', $t->getMessage());
         }
     }
 
@@ -321,11 +175,15 @@ class PengajuanController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $check = Pengajuan::where('user_id', Auth::id())->first();
-        if (!$check) {
-            abort(403);
+
+        $pengajuan = Pengajuan::where('id', $id)
+            ->where('user_id', Auth::id())
+            ->first();
+
+        if (!$pengajuan) {
+            abort(403, 'Tidak ada akses!');
         }
-        $pengajuan = Pengajuan::find($id);
+
         return view('user.detail-pengajuan', ['pengajuan' => $pengajuan]);
     }
 
@@ -334,8 +192,14 @@ class PengajuanController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $pengajuan = Pengajuan::where('id', $id)->first();
-        if (Pengajuan::where('user_jenis_perusahaan' == 'media-cetak')) {
+
+        try {
+            $pengajuan = Pengajuan::find($id);
+            if (!$pengajuan) {
+                return response()->json(['error' => 'Pengajuan tidak ditemukan!'], 404);
+            }
+
+            // Daftar file yang akan dihapus
             $filesDelete = [
                 public_path('pengajuan/surat_kerjasama/' . $pengajuan->surat_permohonan_kerjasama),
                 public_path('pengajuan/akta_pendirian/' . $pengajuan->akta_pendirian_dan_perubahan),
@@ -353,76 +217,116 @@ class PengajuanController extends Controller
                 public_path('pengajuan/sertifikat_pers/' . $pengajuan->sertifikat_verif_dewan_pers),
                 public_path('pengajuan/surat_kebenaran/' . $pengajuan->surat_pernyataan_kebenaran),
                 public_path('pengajuan/sertifikat_ukw/' . $pengajuan->sertifikat_ukw),
-                // MEDIA CETAK
-                public_path('pengajuan/pernyataan_media_cetak/' . $pengajuan->surat_pernyataan_media_cetak),
-                public_path('pengajuan/pernyataan_oplah/' . $pengajuan->surat_pernyataan_jumlah_oplah),
             ];
+
+            // Menambahkan file sesuai dengan jenis perusahaan
+            if ($pengajuan->user_jenis_perusahaan == 'media-cetak') {
+                $filesDelete = array_merge($filesDelete, [
+                    public_path('pengajuan/pernyataan_media_cetak/' . $pengajuan->surat_pernyataan_media_cetak),
+                    public_path('pengajuan/pernyataan_oplah/' . $pengajuan->surat_pernyataan_jumlah_oplah),
+                ]);
+            } elseif ($pengajuan->user_jenis_perusahaan == 'media-elektronik') {
+                $filesDelete = array_merge($filesDelete, [
+                    public_path('pengajuan/surat_izin/' . $pengajuan->izin_siaran_media_elektronik),
+                    public_path('pengajuan/pernyataan_media_elektronik/' . $pengajuan->surat_pernyataan_media_elektronik),
+                ]);
+            } elseif ($pengajuan->user_jenis_perusahaan == 'media-siber') {
+                $filesDelete = array_merge($filesDelete, [
+                    public_path('pengajuan/pernyataan_media_siber/' . $pengajuan->surat_pernyataan_media_siber),
+                    public_path('pengajuan/screenshoot_web/' . $pengajuan->screenshoot_perusahaan_media_siber),
+                    public_path('pengajuan/screenshoot_data_pengunjung/' . $pengajuan->screenshoot_data_pengunjung_web),
+                ]);
+            }
+
+            // Hapus file
             foreach ($filesDelete as $file) {
                 if (file_exists($file)) {
                     unlink($file);
                 }
             }
+
+            // Hapus data pengajuan
             $pengajuan->delete();
-            return response()->json(['success' => 'Pengajuan Berhasil Dihapus!']);
-        } elseif (Pengajuan::where('user_jenis_perusahaan' == 'media-elektronik')) {
-            $filesDelete = [
-                public_path('pengajuan/surat_kerjasama/' . $pengajuan->surat_permohonan_kerjasama),
-                public_path('pengajuan/akta_pendirian/' . $pengajuan->akta_pendirian_dan_perubahan),
-                public_path('pengajuan/bukti_pengesahan/' . $pengajuan->bukti_pengesahan),
-                public_path('pengajuan/nib_siup_situ/' . $pengajuan->nib_siup_situ),
-                public_path('pengajuan/sk_domisili_perusahaan/' . $pengajuan->sk_domisili_perusahaan),
-                public_path('pengajuan/npwp_perusahaan/' . $pengajuan->npwp_perusahaan),
-                public_path('pengajuan/spt/' . $pengajuan->spt_terakhir),
-                public_path('pengajuan/harga/' . $pengajuan->daftar_harga),
-                public_path('pengajuan/referend_rekening/' . $pengajuan->referend_dan_rekening_bank),
-                public_path('pengajuan/surat_tugas/' . $pengajuan->surat_tugas),
-                public_path('pengajuan/kartu_pers/' . $pengajuan->kartu_pers),
-                public_path('pengajuan/surat_penanggungjawab/' . $pengajuan->surat_pernyataan_penanggungjawab),
-                public_path('pengajuan/surat_kuasa/' . $pengajuan->surat_kuasa),
-                public_path('pengajuan/sertifikat_pers/' . $pengajuan->sertifikat_verif_dewan_pers),
-                public_path('pengajuan/surat_kebenaran/' . $pengajuan->surat_pernyataan_kebenaran),
-                public_path('pengajuan/sertifikat_ukw/' . $pengajuan->sertifikat_ukw),
-                // MEDIA ELEKTRONIK
-                public_path('pengajuan/surat_izin/' . $pengajuan->izin_siaran_media_elektronik),
-                public_path('pengajuan/pernyataan_media_elektronik/' . $pengajuan->surat_pernyataan_media_elektronik),
-            ];
-            foreach ($filesDelete as $file) {
-                if (file_exists($file)) {
-                    unlink($file);
-                }
+
+            return response()->json(['success' => 'User dan semua pengajuan berhasil dihapus!']);
+        } catch (\Exception $e) {
+            // Tangani error jika ada masalah
+            return response()->json(['error' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function UpdatePengajuan(Request $request)
+    {
+        $pengajuan = Pengajuan::find($request->id);
+        if (!$pengajuan) {
+            return back()->with('error', 'Data pengajuan tidak ditemukan.');
+        }
+
+        // Validasi
+        $allowedNumbers = range(1, 24);
+        $request->validate([
+            'file_type' => ['bail', 'required_without_all:document_file,link_katalog', 'integer', 'in:' . implode(',', $allowedNumbers)],
+            'document_file' => 'required_without:link_katalog|nullable|mimes:pdf|max:3072',
+            'link_katalog' => 'required_without:document_file|nullable|string|max:255',
+        ]);
+
+        $fileType = (int) $request->file_type;
+
+        // Jika yang diupdate adalah link katalog
+        if ($fileType === 17) {
+            try {
+                $pengajuan->update(['link_e_katalog' => $request->link_katalog]);
+                return back()->with('success', 'Link e-Katalog berhasil diperbarui!');
+            } catch (\Throwable $t) {
+                return back()->with('error', $t->getMessage());
             }
-            $pengajuan->delete();
-            return response()->json(['success' => 'Pengajuan Berhasil Dihapus!']);
-        } elseif (Pengajuan::where('user_jenis_perusahaan' == 'media-siber')) {
-            $filesDelete = [
-                public_path('pengajuan/surat_kerjasama/' . $pengajuan->surat_permohonan_kerjasama),
-                public_path('pengajuan/akta_pendirian/' . $pengajuan->akta_pendirian_dan_perubahan),
-                public_path('pengajuan/bukti_pengesahan/' . $pengajuan->bukti_pengesahan),
-                public_path('pengajuan/nib_siup_situ/' . $pengajuan->nib_siup_situ),
-                public_path('pengajuan/sk_domisili_perusahaan/' . $pengajuan->sk_domisili_perusahaan),
-                public_path('pengajuan/npwp_perusahaan/' . $pengajuan->npwp_perusahaan),
-                public_path('pengajuan/spt/' . $pengajuan->spt_terakhir),
-                public_path('pengajuan/harga/' . $pengajuan->daftar_harga),
-                public_path('pengajuan/referend_rekening/' . $pengajuan->referend_dan_rekening_bank),
-                public_path('pengajuan/surat_tugas/' . $pengajuan->surat_tugas),
-                public_path('pengajuan/kartu_pers/' . $pengajuan->kartu_pers),
-                public_path('pengajuan/surat_penanggungjawab/' . $pengajuan->surat_pernyataan_penanggungjawab),
-                public_path('pengajuan/surat_kuasa/' . $pengajuan->surat_kuasa),
-                public_path('pengajuan/sertifikat_pers/' . $pengajuan->sertifikat_verif_dewan_pers),
-                public_path('pengajuan/surat_kebenaran/' . $pengajuan->surat_pernyataan_kebenaran),
-                public_path('pengajuan/sertifikat_ukw/' . $pengajuan->sertifikat_ukw),
-                // MEDIA SIBER
-                public_path('pengajuan/pernyataan_media_siber/' . $pengajuan->surat_pernyataan_media_siber),
-                public_path('pengajuan/screenshoot_web/' . $pengajuan->screenshoot_perusahaan_media_siber),
-                public_path('pengajuan/screenshoot_data_pengunjung/' . $pengajuan->screenshoot_data_pengunjung_web),
-            ];
-            foreach ($filesDelete as $file) {
-                if (file_exists($file)) {
-                    unlink($file);
-                }
+        }
+
+        // Mapping tipe dokumen ke field dan folder
+        $map = [
+            1 => ['field' => 'surat_permohonan_kerjasama', 'folder' => 'pengajuan/surat_kerjasama'],
+            2 => ['field' => 'akta_pendirian_dan_perubahan', 'folder' => 'pengajuan/akta_pendirian'],
+            3 => ['field' => 'bukti_pengesahan', 'folder' => 'pengajuan/bukti_pengesahan'],
+            4 => ['field' => 'nib_siup_situ', 'folder' => 'pengajuan/nib_siup_situ'],
+            5 => ['field' => 'sk_domisili_perusahaan', 'folder' => 'pengajuan/sk_domisili_perusahaan'],
+            6 => ['field' => 'npwp_perusahaan', 'folder' => 'pengajuan/npwp_perusahaan'],
+            7 => ['field' => 'spt_terakhir', 'folder' => 'pengajuan/spt'],
+            8 => ['field' => 'daftar_harga', 'folder' => 'pengajuan/harga'],
+            9 => ['field' => 'referend_dan_rekening_bank', 'folder' => 'pengajuan/referend_rekening'],
+            10 => ['field' => 'surat_tugas', 'folder' => 'pengajuan/surat_tugas'],
+            11 => ['field' => 'kartu_pers', 'folder' => 'pengajuan/kartu_pers'],
+            12 => ['field' => 'surat_pernyataan_penanggungjawab', 'folder' => 'pengajuan/surat_penanggungjawab'],
+            13 => ['field' => 'surat_kuasa', 'folder' => 'pengajuan/surat_kuasa'],
+            14 => ['field' => 'sertifikat_verif_dewan_pers', 'folder' => 'pengajuan/sertifikat_pers'],
+            15 => ['field' => 'surat_pernyataan_kebenaran', 'folder' => 'pengajuan/surat_kebenaran'],
+            16 => ['field' => 'sertifikat_ukw', 'folder' => 'pengajuan/sertifikat_ukw'],
+        ];
+
+        if (!isset($map[$fileType])) {
+            return back()->with('error', 'Tipe dokumen tidak valid.');
+        }
+
+        $field = $map[$fileType]['field'];
+        $folder = $map[$fileType]['folder'];
+        $file = $request->file('document_file');
+        $nama_dokumen = Str::random(40) . '.' . $file->getClientOriginalExtension();
+        $oldFilePath = public_path("{$folder}/" . $pengajuan->{$field});
+
+        try {
+            // Hapus file lama jika ada
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
             }
-            $pengajuan->delete();
-            return response()->json(['success' => 'Pengajuan Berhasil Dihapus!']);
+
+            // Simpan file baru
+            $file->move($folder, $nama_dokumen);
+
+            // Update database
+            $pengajuan->update([$field => $nama_dokumen]);
+
+            return back()->with('success', 'Dokumen berhasil diperbarui!');
+        } catch (\Throwable $t) {
+            return back()->with('error', $t->getMessage());
         }
     }
 }

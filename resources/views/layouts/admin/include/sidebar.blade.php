@@ -52,18 +52,13 @@
                     @if (Auth::user()->role == 'user' && Auth::user()->account_status == 'active')
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Pengajuan Kerjasama</h6>
+                            <h6>Menu Pengajuan</h6>
                         </div>
                     </li>
                     <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav {{ request()->is('list-pengajuan', 'lihat-pengajuan/*', 'pengajuan/*') ? 'active' : '' }}" href="{{ route('view-pengajuan') }}">
                         <svg class="stroke-icon">
                             <use href="{{ asset('assets/svg/icon-sprite.svg').'#stroke-layout'}}"></use>
-                        </svg><span>Semua Pengajuan</span></a>
-                    </li>
-                    <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav {{ request()->is('pengajuan-form') ? 'active' : '' }}" href="{{ route('view-form-pengajuan') }}">
-                        <svg class="stroke-icon">
-                            <use href="{{ asset('assets/svg/icon-sprite.svg').'#stroke-table'}}"></use>
-                        </svg><span>Buat Pengajuan</span></a>
+                        </svg><span>Pengajuan Kerjasama</span></a>
                     </li>
                     @endif
                     @if (Auth::user()->role == 'admin' && Auth::user()->account_status == 'active')
@@ -84,8 +79,13 @@
                     </li>
                     <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav {{ request()->is('approval-account') ? 'active' : '' }}" href="{{ route('view-approval-akun') }}">
                         <svg class="stroke-icon">
-                            <use href="{{ asset('assets/svg/icon-sprite.svg').'#stroke-user'}}"></use>
+                            <use href="{{ asset('assets/svg/icon-sprite.svg').'#stroke-to-do'}}"></use>
                         </svg><span>Approve User</span></a>
+                    </li>
+                    <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav {{ request()->is('active-account') ? 'active' : '' }}" href="{{ route('view-aktif-akun') }}">
+                        <svg class="stroke-icon">
+                            <use href="{{ asset('assets/svg/icon-sprite.svg').'#stroke-user'}}"></use>
+                        </svg><span>Aktif User</span></a>
                     </li>
                     @endif
                 </ul>

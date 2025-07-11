@@ -32,7 +32,6 @@
                 <h4>Pengajuan Pembuatan Akun </h4><span>Semua Akun dibawah ini merupakan semua Akun yang telah terdaftar di Aplikasi SiMadun dan belum di Approve oleh Admin.</span>
               </div>
               <div class="card-body">
-                @include('../components/notif')
                 <div class="table-responsive theme-scrollbar">
                   <table class="display" id="approval-account">
                     <thead>
@@ -58,77 +57,15 @@
                         <td>{{$inactive->media_name}}</td>
                         <td>{{$inactive->created_at}}</td>
                         <td> <span class="badge badge-danger">{{ucfirst($inactive->account_status)}}</span></td>
-                        <td class="row">
-                          <div class="btn-group">
-                            <div class="col-md-6">
-                              <form action="{{ route('proses-active-akun', $inactive->id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <a class="btn btn-pill btn-outline-success btn-air-success btn-xs approve" type="submit" onclick="return false" data-toggle="tooltip" title="Approve">Approve</a>
-                              </form>
-                            </div>
-                            <div class="col-md-6">
-                              <form action="{{ route('delete-approval-akun', $inactive->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <a class="btn btn-pill btn-outline-danger btn-air-danger btn-xs delete-confirm" type="submit" onclick="return false" data-toggle="tooltip" title='Hapus'>Hapus</a>
-                              </form>
-                            </div>
-                          </div>  
-                        </td>
-                      </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <div class="card">
-              <div class="card-header">
-                <h4>Daftar Akun </h4><span>Semua Akun dibawah ini merupakan semua Akun yang telah terdaftar di Aplikasi SiMadun dan sudah di Approve oleh Admin.</span>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive theme-scrollbar">
-                  <table class="display" id="list-account">
-                    <thead>
-                      <tr>
-                        <th>No.</th>
-                        <th>Nama Lengkap Wartawan</th>
-                        <th>Email</th>
-                        <th>Nomor Telepon</th>
-                        <th>Nama Media</th>
-                        <th>Status Akun</th>
-                        <th>Tanggal Approve</th>
-                        <th>Role</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @php $no = 1; @endphp
-                      @foreach ($useractive as $active)
-                      <tr>
-                        <td>{{ $no++ }}.</td>
-                        <td>{{ucfirst($active->name)}}</td>
-                        <td>{{$active->email}}</td>
-                        <td>{{$active->no_hp}}</td>
-                        <td>{{$active->media_name}}</td>
-                        <td> <span class="badge badge-success">{{ucfirst($active->account_status)}}</span></td>
-                        <td>{{$active->updated_at}}</td>
-                        <td>
-                          @if ($active->role == 'user')
-                          <span class="badge badge-light-success">{{ucfirst($active->role)}}</span>
-                          @elseif ($active->role == 'admin')
-                          <span class="badge badge-light-danger">{{ucfirst($active->role)}}</span>
-                          @endif
-                        </td>
                         <td>
                           <ul class="action">
-                            <li class="detail"><a data-bs-toggle="tooltip" title="Kunci Akun" href="javascript:void()"><i class="icon-lock"></i></a></li>
-                            <li class="edit"><a data-bs-toggle="tooltip" title="Edit" href="javascript:void()"><i class="icon-pencil-alt"></i></a></li>
-                            <li class="delete"><a data-bs-toggle="tooltip" title="Hapus" href="javascript:void()"><i class="icon-trash"></i></a></li>
-                          </ul>
+                            <li class="detail">
+                              <a href="#" class="btn btn-xs btn-outline-success btn-air-success approve" data-url="{{ route('proses-active-akun', $inactive->id) }}"data-toggle="tooltip" title="Approve">Approve</a>
+                            </li>
+                            <li>
+                              <a href="{{ route('delete.approval.akun', $inactive->id) }}" class="btn btn-xs btn-outline-danger btn-air-danger btn-delete" data-toggle="tooltip" title="Hapus">Hapus</a>
+                            </li>
+                          </ul>  
                         </td>
                       </tr>
                       @endforeach
@@ -146,44 +83,134 @@
 
 @section('script')
     <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('assets/js/height-equal.js') }}"></script>
     <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
+
     <script>
-      $("#approval-account, #list-account").DataTable();
-    </script>
-    <script type="text/javascript">
-      $('.approve').on('click', function (e) {
-        e.preventDefault();
-        let form = $(this).closest('form');
-        swal({
-          title: `Anda Yakin?`,
-          text: "Anda akan menyetujui pembuatan akun ini.",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        })
-        .then((willDelete) => {
-          if (willDelete) {
-            form.submit();
+      $(document).ready(function () {
+        // Inisialisasi DataTables
+        const table = $("#approval-account").DataTable({
+          language: {
+            emptyTable: "Tidak ada data yang tersedia.",
+            zeroRecords: "Tidak ditemukan data yang sesuai.",
           }
         });
-      });
-    </script>
-    <script type="text/javascript">
-      $('.delete-confirm').on('click', function (e) {
-        e.preventDefault();
-        let form = $(this).closest('form');
-        swal({
-          title: `Anda Yakin?`,
-          text: "Akun yang dihapus tidak dapat dikembalikan.",
-          icon: "error",
-          buttons: true,
-          dangerMode: true,
-        })
-        .then((willDelete) => {
-          if (willDelete) {
-            form.submit();
+        // Setup CSRF token untuk AJAX
+        $.ajaxSetup({
+          headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+          },
+        });
+        // Event saat klik tombol hapus
+        $(document).on("click", ".btn-delete", function (ev) {
+          ev.preventDefault();
+          const urlToRedirect = $(this).attr("href");
+          const row = $(this).closest("tr");
+          swal({
+            title: "Anda Yakin?",
+            text: "Anda akan menghapus pembuatan akun ini.",
+            icon: "error",
+            buttons: {
+              cancel: "Batal",
+              confirm: {
+                text: "Ya, Hapus!",
+                value: true,
+                className: "btn-danger"
+              }
+            },
+            dangerMode: true,
+          }).then((willDelete) => {
+            if (willDelete) {
+              $.ajax({
+                type: "POST",
+                url: urlToRedirect,
+                data: {
+                  _method: "DELETE"
+                },
+                success: function (response) {
+                  // Hapus baris dari DataTable
+                  table.row(row).remove().draw();
+                  swal("Sukses!", "Pengajuan pembuatan akun berhasil dihapus.", "success");
+                },
+                error: function (xhr) {
+                  let msg = "Terjadi kesalahan saat menghapus.";
+                  if (xhr.responseJSON && xhr.responseJSON.error) {
+                    msg = xhr.responseJSON.error;
+                  }
+                  swal("Gagal!", msg, "error");
+                }
+              });
+            }
+          });
+        });
+
+        $(document).ready(function () {
+          // Event saat klik tombol approve
+          $(document).on("click", ".approve", function (ev) {
+            ev.preventDefault();
+            const urlToRedirect = $(this).data("url");
+            if (!urlToRedirect) {
+              swal("Error", "URL tujuan tidak ditemukan.", "error");
+              return;
+            }
+            swal({
+              title: "Anda Yakin?",
+              text: "Anda akan menyetujui pembuatan akun ini.",
+              icon: "warning",
+              buttons: {
+                cancel: "Batal",
+                confirm: {
+                  text: "Ya, Setujui!",
+                  value: true,
+                  visible: true,
+                  className: "btn-success",
+                },
+              },
+              dangerMode: true,
+            }).then((willApprove) => {
+              if (willApprove) {
+                $.ajaxSetup({
+                  headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                  },
+                });
+                // Tampilkan loading
+                swal({
+                  title: "Memproses!",
+                  text: "Mohon tunggu sebentar...",
+                  buttons: false,
+                  closeOnClickOutside: false,
+                  closeOnEsc: false,
+                });
+
+                $.ajax({
+                  type: "POST",
+                  url: urlToRedirect,
+                  success: function (response) {
+                    const message = response.message || "Pengajuan akun berhasil disetujui.";
+                    sessionStorage.setItem("approved", message);
+                    location.reload();
+                  },
+                  error: function (xhr, status, error) {
+                    let errMsg = "Terjadi kesalahan saat menyetujui.";
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                      errMsg = xhr.responseJSON.message;
+                    }
+                    swal("Gagal!", errMsg, "error");
+                  },
+                });
+              }
+            });
+          });
+
+          // Notifikasi setelah reload
+          const approvedMessage = sessionStorage.getItem("approved");
+          if (approvedMessage) {
+            swal("Sukses!", approvedMessage, "success");
+            sessionStorage.removeItem("approved");
           }
         });
+
       });
     </script>
 @endsection
