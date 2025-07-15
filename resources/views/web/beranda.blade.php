@@ -81,7 +81,7 @@
                                 <div class="media-body">Kualifikasi Media Elektronik</div>
                             </li>
                         </ul>
-                        <a class="btn-solid-reg popup-with-move-anim" href="#">Baca Lebih lanjut</a>
+                        <a class="btn-solid-reg" href="{{ route('syarat.ketentuan') }}">Baca Lebih lanjut</a>
                     </div> <!-- end of text-container -->
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
@@ -102,7 +102,7 @@
                     <!-- Video Preview -->
                     <div class="image-container">
                         <div class="video-wrapper">
-                            <a class="popup-youtube" href="https://www.youtube.com/watch?v=fLCjQJCekTs" data-effect="fadeIn">
+                            <a class="popup-youtube" href="#" data-effect="fadeIn">
                                 <img class="img-fluid" src="{{asset('web/assets/images/video-frame.svg')}}" alt="alternative">
                                 <span class="video-play-button">
                                     <span></span>

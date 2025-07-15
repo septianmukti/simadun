@@ -42,7 +42,7 @@
                     <div class="text-container">
                         <h3>APA ITU SIMADUN?</h3>
                         <p>SIMADUN (Sistem Informasi Media di Madiun) merupakan inovasi dari Dinas Komunikasi dan Informatika (Diskominfo) Kabupaten Madiun, dalam rangka menjalankan tugas kerjasama media Pemerintah Kabupaten Madiun dengan media partner, secara transparan, efektif dan efisien.</p>
-                        <p>Selain itu SIMADUN diharap dapat memenuhi kebutuhan atas data yang akurat, terbuka, dan interoperabel atau mudah dibagi pakaikan kepada masyarakat Magetan terkait perusahaan media, wartawan maupun kegiatan kejurnalistikan.</p>
+                        <p>Selain itu SIMADUN diharap dapat memenuhi kebutuhan atas data yang akurat, terbuka, dan interoperabel atau mudah dibagi pakaikan kepada masyarakat Madiun terkait perusahaan media, wartawan maupun kegiatan kejurnalistikan.</p>
                     </div> <!-- end of text-container-->
                     
                     <div class="text-container">

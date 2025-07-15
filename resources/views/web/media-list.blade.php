@@ -101,6 +101,7 @@
     <script>
         $('#data-media').DataTable( {
             scrollX: true,
+            pageLength: 25,
             "language": {
                 "lengthMenu": "Tampilkan _MENU_ data per halaman",
                 "zeroRecords": "Tidak ada data yang ditemukan",
